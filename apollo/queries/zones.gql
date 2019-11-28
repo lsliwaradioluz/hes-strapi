@@ -1,0 +1,11 @@
+query Zones {
+  zones {
+    id
+    name
+    header
+    subheader
+    image {
+      url
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "My divine Nuxt.js project",
+  "author": "lsliwaradioluz",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/vue-fontawesome": "^0.1.8",
+    "@nuxtjs/apollo": "^4.0.0-rc17",
+    "cookieparser": "^0.1.0",
+    "graphql": "^14.5.8",
+    "js-cookie": "^2.2.1",
+    "lodash": "^4.17.15",
+    "nuxt": "^2.0.0",
+    "strapi-sdk-javascript": "^0.3.3",
+    "uikit": "^3.2.3",
+    "vue-stripe-elements-plus": "^0.3.2"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2"
+  }
+}

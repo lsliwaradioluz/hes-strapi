@@ -1,0 +1,11 @@
+query Coaches {
+  coaches {
+    id
+    name
+    description
+    personal
+    image {
+      url
+    }
+  }
+}

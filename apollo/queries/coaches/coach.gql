@@ -1,0 +1,13 @@
+query Coach($id: ID!) {  
+  coach(id: $id) {
+    id
+    name
+    description
+    workouts {
+      name
+    }
+    image {
+      url
+    }
+  }
+}

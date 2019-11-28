@@ -1,0 +1,26 @@
+query Days {
+  days {
+    id
+    name
+    cross {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+    fitness {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+  }
+}

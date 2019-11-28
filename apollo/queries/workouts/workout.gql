@@ -1,0 +1,12 @@
+query Workout($id: ID!) {  
+  workout(id: $id) {
+   id
+    name
+    type
+    time
+    description
+    image {
+      url
+    }
+  }
+}

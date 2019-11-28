@@ -1,0 +1,15 @@
+query Coaches {
+  coaches {
+    id
+    name
+    description
+    fitness
+    cross
+    image {
+      url
+    }
+    workouts {
+      name
+    }
+  }
+}

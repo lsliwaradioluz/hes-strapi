@@ -1,0 +1,10 @@
+query Facilities {
+  facilities {
+    id 
+    header
+    subheader
+    image {
+      url
+    }
+  }
+}

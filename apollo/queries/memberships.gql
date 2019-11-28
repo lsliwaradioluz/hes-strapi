@@ -1,0 +1,10 @@
+query Memberships {
+  memberships {
+    id
+    name
+    price
+    entries {
+      entry
+    }
+  }
+}

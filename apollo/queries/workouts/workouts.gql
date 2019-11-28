@@ -1,0 +1,12 @@
+query Workouts {
+  workouts {
+    id
+    name
+    type
+    zone
+    description
+    image {
+      url
+    }
+  }
+}
