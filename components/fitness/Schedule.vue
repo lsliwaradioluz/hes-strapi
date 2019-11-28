@@ -57,7 +57,7 @@
           });
         }
 
-        const uniqueHours = Array.from(new Set(fetchedClasses.map(JSON.stringify)), JSON.parse);
+        const uniqueHours = _.union(fetchedClasses);
         const sortedHours = uniqueHours.sort((a, b) => {
           if (a[0] !== b[0]) {
             return a[0] - b[0];            
