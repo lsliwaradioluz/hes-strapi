@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -49,11 +50,12 @@ export default {
   */
   modules: [
     '@nuxtjs/apollo',
+    ['@nuxtjs/dotenv', { systemvars: true, path: process.env.NODE_ENV == 'development' ? '.env.development' : '.env' }],
   ],
   apollo: {  
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://hes-backend.herokuapp.com/graphql'
+        httpEndpoint: process.env.GRAPHQL_URL
       }
     }
   },
