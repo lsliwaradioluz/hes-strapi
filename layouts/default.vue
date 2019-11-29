@@ -22,5 +22,9 @@ export default {
 </script>  
 
 <style>
-  
+  @import url('https://fonts.googleapis.com/css?family=Oswald:400,500,600,700&display=swap');
+    
+html, body {
+  font-family: 'Oswald', sans-serif;
+}
 </style>

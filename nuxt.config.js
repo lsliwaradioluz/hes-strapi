@@ -28,10 +28,10 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/styles/general.css',
     '~/assets/styles/main.css',
     '~/assets/styles/animations.css',
     '~/assets/styles/scrollbar.css',
-    '~/assets/styles/general.css',
     '~/assets/icons/font/flaticon.css',
   ],
   /*
