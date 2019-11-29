@@ -50,7 +50,7 @@ export default {
   */
   modules: [
     '@nuxtjs/apollo',
-    ['@nuxtjs/dotenv', { systemvars: true, path: process.env.NODE_ENV == 'development' ? '.env.development' : '.env.production' }],
+    ['@nuxtjs/dotenv', { systemvars: true }],
   ],
   apollo: {  
     clientConfigs: {
