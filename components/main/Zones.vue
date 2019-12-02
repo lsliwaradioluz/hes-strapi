@@ -2,7 +2,7 @@
   <client-only>
     <div class="zones">
       <div class="zone" v-for="zone in zones" :key="zone.id">
-        <div class="zone__image" :style="{ backgroundImage: `url('http://localhost:1337${zone.image.url}')`}"></div>
+        <div class="zone__image" :style="{ backgroundImage: `url('${zone.image.url}')`}"></div>
         <div class="zone__details gray">
           <div class="zone__details-header header">
             {{ zone.header }}

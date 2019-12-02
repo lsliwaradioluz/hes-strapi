@@ -2,7 +2,7 @@
   <client-only>
     <div class="facilities main">
       <div class="facility" v-for="facility in facilities" :key="facility.id">
-        <div class="facility__image" :style="{ backgroundImage: `url('http://localhost:1337${facility.image.url}')` }"></div>
+        <div class="facility__image" :style="{ backgroundImage: `url('${facility.image.url}')` }"></div>
         <div class="facility__header title">{{ facility.header }}</div>
         <div class="facility__subheader">{{ facility.subheader }}</div>
       </div>
