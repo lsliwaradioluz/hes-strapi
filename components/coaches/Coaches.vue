@@ -4,8 +4,7 @@
       <div class="coaches__title header">Nasi trenerzy</div>
       <div class="coaches__container">
         <div class="coach gray" v-for="coach in filteredCoaches" :key="coach.id">
-          {{ coach.image.url }}
-        <div class="coach__image" :style="{ backgroundImage: `url('http://localhost:1337${coach.image.url}')`}"></div>
+        <div class="coach__image" :style="{ backgroundImage: `url('${coach.image.url}')`}"></div>
         <div class="coach__details">
           <div class="coach__details-name">{{ coach.name }}</div>
           <div class="coach__details-workouts">
