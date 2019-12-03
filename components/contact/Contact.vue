@@ -22,7 +22,7 @@
 
 <script>	
 	import Strapi from 'strapi-sdk-javascript';
-	const strapi = new Strapi('http://hes-backend.herokuapp.com');
+	const strapi = new Strapi('https://hes-backend.herokuapp.com');
 
 	export default {
 		data() {
