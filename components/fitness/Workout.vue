@@ -1,14 +1,14 @@
 <template>
   <client-only>
     <div class="workout">
-      <div class="workout__background" :style="{ backgroundImage: backgroundImage }"></div>
+      <div class="workout__background" :style="{ backgroundImage: `url('${workout.image.url}')` }"></div>
       <div class="workout__details main">
         <div class="workout__details-header">{{ workout.name }}</div>
-        <div class="workout__details-subheader text-red">
+        <div class="workout__details-subheader red">
           {{ subheader }}
         </div>
-        <div class="workout__details-days text-red" v-if="zone == 'fitness'">
-          <span v-for="(time, index) in workoutTimes">{{ time.name | shortDayName | separate(index)}}<span v-for="hour in time.time"> {{ hour }}</span></span>
+        <div class="workout__details-days red" v-if="zone == 'fitness'">
+          <span v-for="(time, index) in workoutTimes">{{ time.name | shortDayName }}<span v-for="hour in time.time"> {{ hour }}</span>&nbsp;</span>
         </div>     
         <div class="workout__details-description">{{ workout.description }}</div>
         <div class="workout__details-buttons">
@@ -32,13 +32,6 @@ export default {
     subheader() {
       return this.zone == 'cross' ? this.workoutTime : `${this.workout.type} / ${this.workoutTime}`;
     },
-    backgroundImage() {
-      if (window.innerWidth < 768) {
-        return this.workout.image.url ? `url('http://localhost:1337${this.workout.image.url}')` : `url('http://localhost:1337/uploads/cdad1ce61a654e9eb12ba75b9dcea286.jpg')`;
-      } else { 
-        return this.workout.image.url ? `url('http://localhost:1337/uploads/8d558c27122d42e2a14286be4e309c6b.png'), url('http://localhost:1337${this.workout.image.url}')` : `url('http://localhost:1337/uploads/8d558c27122d42e2a14286be4e309c6b.png'), url('http://localhost:1337/uploads/cdad1ce61a654e9eb12ba75b9dcea286.jpg')`;
-      }
-    }, 
     workoutTime() {
       if (this.workout.time == 'min60') {
         return '60 minut'
@@ -88,9 +81,6 @@ export default {
         case 'Niedziela': 
           return 'nd'
       }
-    }, 
-    separate(value, index) {
-      return index == 0 ?  value : `/${value}`;
     }
   }
 };
@@ -160,14 +150,13 @@ export default {
     .workout__background {
       min-height: 100vh;
       width: 40%;
-      background-size: cover, cover;
-      background-position: right bottom, center center;
+      background-size: cover;
+      background-position: center;
     }
 
     .workout__details {
       width: 60%;
       min-height: 100vh;
-      padding-left: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;

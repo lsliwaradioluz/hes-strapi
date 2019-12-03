@@ -1,13 +1,13 @@
 <template>
   <div class="landing">
     <video class="landing__video" autoplay muted loop>
-      <source src="http://localhost:1337/uploads/2a037e871e8a4ca28301db598bac9417.mp4" type="video/mp4">
+      <source :src="background.image.url" type="video/mp4">
     </video>
     <div class="landing__headers main">
        <div class="landing__header title">
         stać cię na więcej niż myślisz
       </div>
-      <div class="landing__cta button">
+      <div class="landing__cta button" @click="$root.$emit('scroll')">
         Wybierz swoją strefę
       </div>
     </div>
@@ -15,7 +15,19 @@
 </template>
 
 <script>
-export default {};
+
+  export default {
+    props: ['backgrounds'],
+    computed: {
+      background() {
+        const background = this.backgrounds.filter(background => {
+          return background.name == 'main';
+        });
+        
+        return background[0];
+      }
+    }
+  };
 </script>
 
 <style scoped>

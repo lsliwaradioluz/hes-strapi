@@ -5,11 +5,13 @@ query Coaches {
     description
     fitness
     cross
+    personal
     image {
       url
     }
     workouts {
       name
+      zone
     }
   }
 }

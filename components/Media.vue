@@ -20,7 +20,7 @@
       </div>
       <div class="media__form main">
         <div class="media__form-header">Masz do nas pytanie?</div>
-        <div class="media__form-button button">Napisz teraz</div>
+        <nuxt-link class="media__form-button button" :to="{ name: 'contact', params: { focusForm: true } }">Napisz teraz</nuxt-link>
       </div>
     </div>
   </client-only>

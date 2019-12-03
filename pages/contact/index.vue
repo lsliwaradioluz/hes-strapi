@@ -19,14 +19,17 @@
   import Head from '~/components/fitness/Head';
   import Contact from '~/components/contact/Contact';
 
+  import backgroundQuery from '~/apollo/queries/backgrounds/fitness.gql';
+
   export default {
     components: {
       Head,
       Contact,
     },
-    data() {
-      return {
-        background: 'http://localhost:1337/uploads/3e7a92aaf85141acb5717342b7b1ac19.png'
+    apollo: {
+      background: {
+        prefetch: true, 
+        query: backgroundQuery
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="memberships main">
+  <div class="memberships main" ref="memberships">
     <div class="membership" v-for="membership in memberships" :key="membership.id">
       <p class="membership__title">{{ membership.name }}</p>
       <ul class="membership__details">
@@ -14,6 +14,11 @@
 
   export default {
     props: ['memberships'],
+    mounted() {
+      this.$root.$on('scroll', () => {
+        this.$refs.memberships.scrollIntoView({behavior: "smooth"});
+      });
+    }
   }
 </script>
 

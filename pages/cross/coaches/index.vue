@@ -19,13 +19,9 @@
   import Coaches from '~/components/coaches/Coaches'
 
   import coachesQuery from '~/apollo/queries/coaches/coaches.gql'
+  import backgroundQuery from '~/apollo/queries/backgrounds/cross.gql'
 
   export default {
-    data() {
-      return {
-        background: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80'
-      }
-    },
     components: {
       Head,
       Coaches
@@ -34,6 +30,10 @@
       coaches: {
         prefetch: true, 
         query: coachesQuery
+      }, 
+      background: {
+        prefetch: true, 
+        query: backgroundQuery
       }
     }
   }

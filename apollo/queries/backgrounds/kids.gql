@@ -1,0 +1,9 @@
+query getBackgrounds ($id: ID = "5de642cc75545300179a47db") {
+  background(id: $id) {
+      id
+      name
+      image {
+        url
+      }
+    } 
+}

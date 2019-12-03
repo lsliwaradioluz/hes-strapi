@@ -8,7 +8,7 @@
         <div class="coach__details">
           <div class="coach__details-name">{{ coach.name }}</div>
           <div class="coach__details-workouts">
-            <span v-for="(workout, index) in coach.workouts" :key="index">{{ workout.name }} </span>
+            <span v-for="(workout, index) in filterWorkouts(coach.workouts)" :key="index">{{ workout.name }} </span>
           </div>
           <font-awesome-icon class="icon" icon="angle-double-down" @click="toggleDescription(coach.id)" :ref="`toggleButton${coach.id}`" />
           <div class="coach__details-description" :ref="`description${coach.id}`">{{ coach.description }}</div>
@@ -23,20 +23,20 @@
 
   export default {
     props: ['coaches', 'zone'],
-    data() {
-      return {
-        
-      }
-    },
     computed: {
       filteredCoaches() {
-        const filteredCoaches = this.coaches.filter(element => {
-          return element[this.zone] == true;
+        const filteredCoaches = this.coaches.filter(coach => {
+          return coach[this.zone] == true;
         });
         return _.shuffle(filteredCoaches);
       }
     },
     methods: {
+      filterWorkouts(workouts) {
+        return workouts.filter(workout => {
+          return workout.zone == this.zone;
+        });
+      },
       toggleDescription(id) {
         this.$refs[`toggleButton${id}`][0].classList.toggle('rotated');
         this.$refs[`description${id}`][0].classList.toggle('toggled');
@@ -92,14 +92,6 @@
     transition: max-height 1s;
   }
 
-  .toggled {
-    max-height: 500px;
-  }
-
-  .rotated {
-    transform: rotate(180deg);
-  }
-
   @media (min-width: 768px) {
     .coaches__container {
       flex-direction: row;
@@ -126,5 +118,13 @@
     .coach {
       width: 30%;
     }
+  }
+
+  .toggled {
+    max-height: 500px;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
   }
 </style>

@@ -57,7 +57,9 @@
           });
         }
 
-        const uniqueHours = _.union(fetchedClasses);
+        const uniqueHours = _.uniqBy(fetchedClasses, function(item) { 
+          return JSON.stringify(item); 
+        });
         const sortedHours = uniqueHours.sort((a, b) => {
           if (a[0] !== b[0]) {
             return a[0] - b[0];            
@@ -73,7 +75,7 @@
         this.days.forEach(cur => {
           const filters = [];
           cur[this.zone].forEach(cur => {
-            this.zone == 'Fitness' ? filters.push(cur.class.type, cur.class.time) : filters.push(cur.class.type);
+            this.zone == 'fitness' ? filters.push(cur.class.type, cur.class.time) : filters.push(cur.class.type);
           })
           workoutFilters.push(...filters);
         });
@@ -119,6 +121,8 @@
           return '30min'
         } else if (value == 'min60') {
           return '60min'
+        } else if (value == 'min45') {
+          return '45min'
         } else {
           return value
         }

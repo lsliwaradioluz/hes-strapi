@@ -10,12 +10,13 @@
 </template>
 
 <script>
+
   export default {
     props: ['background'],
     computed: {
       backgroundImage() {
         if (this.background) {
-          return `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${this.background}')`
+          return `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${this.background.image.url}')`
         } else {
           return 
         }

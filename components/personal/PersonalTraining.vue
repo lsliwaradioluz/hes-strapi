@@ -9,22 +9,18 @@
         <div class="personal-training__pillars-title header">Filary sukcesu</div>
         <div class="personal-training__pillars-container">
           <div class="personal-training__pillar">
-            <i class="flaticon-mission"></i>
             <div class="personal-training__pillar-title">Skuteczność</div>
             <div class="personal-training__pillar-text">Początek przygody z treningiem jest ekscytujący, ale i niezwykle wymagający, choćby ze względów technicznych. Trener personalny pokaże jak ćwiczyć efektywnie i jakich błędów należy unikać, aby twój początek nie skończył się kontuzją.</div>
           </div>
           <div class="personal-training__pillar">
-            <i class="flaticon-team"></i>
             <div class="personal-training__pillar-title">Motywacja</div>
             <div class="personal-training__pillar-text">Masz już karnet do klubu fitness, ale brakuje Ci systematyczności? Jeśli zdecydujesz się na treningi personalne w naszym centrum, możesz zapomnieć o nieregularnych ćwiczeniach i braku diety. Nasi trenerzy angażują się w 100% i tego samego wymagają od swoich podopiecznych. Twój trener - Twój sukces!</div>
           </div>
           <div class="personal-training__pillar">
-            <i class="flaticon-think"></i>
             <div class="personal-training__pillar-title">Wiedza</div>
             <div class="personal-training__pillar-text">Dobry trener nie skupia się na ilości treningów, lecz na ich jakości. Nie tylko nauczy Cię efektywnie ćwiczyć, ale także podzieli się wiedzą z anatomii i fizjologii, żebyś miał pełną kontrolę nad swoim ciałem.</div>
           </div>
           <div class="personal-training__pillar">
-            <i class="flaticon-document"></i>
             <div class="personal-training__pillar-title">Indywidualizm</div>
             <div class="personal-training__pillar-text">Każdy trening jest skrojony tylko na Twoją miarę! Podczas tworzenia planu treningowego uwzględnimy Twoje cele, możliwości i predyspozycje.</div>
           </div>
@@ -37,31 +33,13 @@
         <div class="personal-training__questions-title subtitle">
           Często zadawane pytania
         </div>
-        <div class="personal-training__question">
+        <div class="personal-training__question" v-for="question in questions" :key="question.id">
           <div class="personal-training__question-icon">
             <font-awesome-icon icon="question" class="icon" />
           </div>
           <div class="personal-training__question-description">
-            <p class="text red">W jakich godzinach mogę trenować z trenerem personalnym?</p>
-            <p class="text">Terminy zajęć z trenerem personalnym ustalane są na bieżąco i indywidualnie. Zaletą treningów personalnych jest to, że trener w pierwszej kolejności próbuje dopasować się do swojego podopiecznego. Treningi personalne mogą odbywać się nawet poza godzinami funkcjonowania klubu oraz w dni wolne.</p>
-          </div>
-        </div>
-        <div class="personal-training__question">
-          <div class="personal-training__question-icon">
-            <font-awesome-icon icon="question" class="icon" />
-          </div>
-          <div class="personal-training__question-description">
-            <p class="text red">Gdzie odbywają się zajęcia z trenerem personalnym?</p>
-            <p class="text">Nasz klub posiada osobną salę przeznaczoną specjalnie do treningów personalnych, gdzie w jednym momencie przebywa maksymalnie pięć osób. Dzięki temu zajęcia przebiegają w komfortowych warunkach, bez zamieszania i zgiełku towarzyszącym zajęciom grupowym.</p>
-          </div>
-        </div>
-        <div class="personal-training__question">
-          <div class="personal-training__question-icon">
-            <font-awesome-icon icon="question" class="icon" />
-          </div>
-          <div class="personal-training__question-description">
-            <p class="text red">Ile kosztują treningi personalne?</p>
-            <p class="text">Cena treningów personalnych ustalana jest indywidualnie po pierwszej bezpłatnej konsultacji. Cena będzie zależeć przede wszystkim od liczby osób biorących udział w treningach oraz liczby treningów z góry wykupionych przez klienta.</p>
+            <p class="text red">{{ question.question }}</p>
+            <p class="text">{{ question.answer }}</p>
           </div>
         </div>
       </div>
@@ -73,17 +51,9 @@
   import Coaches from '~/components/coaches/Coaches'
 
   export default {
-    props: ['coaches'], 
+    props: ['coaches', 'questions'], 
     components: {
       Coaches,
-    },
-    computed: {
-      personalCoaches() {
-        const personalCoaches = this.coaches.filter(coach => {
-          return coach.personal == true;
-        });
-        return _.shuffle(personalCoaches);
-      }
     }
   }
 </script>

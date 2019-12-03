@@ -10,11 +10,17 @@
       </div>
       <div class="kidzones">
         <div class="kidzone" v-for="workout in filteredWorkouts" :key="workout.id">
-          <div class="kidzone__image" :style="{ backgroundImage: `url('http://localhost:1337${workout.image.url}')`}"></div>
+          <div class="kidzone__image" :style="{ backgroundImage: `url('${workout.image.url}')`}"></div>
           <div class="kidzone__details">
-            <div class="kidzone__details-name header">{{ workout.name }}</div>
+            <div class="kidzone__details-name">{{ workout.name }}</div>
+            <div class="kidzone__details-days">
+              <span v-for="(workoutTime, index) in workoutTimes(workout.name)" :key="index">
+                {{ workoutTime.name }} 
+                <span v-for="(time, index) in workoutTime.time" :key="index">{{ time }} </span>
+              </span>
+            </div>
+            <font-awesome-icon class="icon" icon="angle-double-down" @click="toggleDescription(workout.id)" :ref="`toggleButton${workout.id}`" />
             <div class="kidzone__details-description" :ref="`description${workout.id}`">{{ workout.description }}</div>
-            <div class="kidzone__details-days">{{ workoutTimes(workout.name) }}</div>
           </div>
         </div>
       </div>
@@ -45,10 +51,14 @@
               workoutHours.push(`${cur.hours}:${minutes}`);
             } 
           });
-          if (workoutHours.length > 0) workoutDays.push({ name: cur.name, time: workoutHours })
+          if (workoutHours.length > 0) workoutDays.push({ name: cur.name, time: [...workoutHours] })
         }); 
         return workoutDays;
-      }, 
+      },
+      toggleDescription(id) {
+        this.$refs[`toggleButton${id}`][0].classList.toggle('rotated');
+        this.$refs[`description${id}`][0].classList.toggle('toggled');
+      }
     }
   }
 </script>
@@ -73,7 +83,32 @@
   }
 
   .kidzone__details {
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+
+  .kidzone__details-name {
+    text-align: left;
+    text-transform: capitalize;
+    font-size: 1.7rem;
+    font-weight: 300;
+  }
+
+  .kidzone__details-days {
+    color: #C20114;
+    text-transform: uppercase;
+  }
+
+  .icon {
+    margin-top: 0.5rem;
+    transition: transform 0.5s;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+
+  .kidzone__details-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s;
   }
 
   @media (min-width: 1024px) {
@@ -92,6 +127,7 @@
       display: flex;
       justify-content: space-between;
       padding-top: 6rem;
+      align-items: flex-start;
     }
 
     .kidzone {
@@ -102,6 +138,14 @@
       height: 40vh;
       width: auto;
     }
+  }
+
+  .toggled {
+    max-height: 500px;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
   }
 
 </style>

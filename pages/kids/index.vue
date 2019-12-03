@@ -20,17 +20,13 @@
 
   import workoutsQuery from '~/apollo/queries/workouts/workouts.gql'
   import daysQuery from '~/apollo/queries/days.gql'
+  import backgroundQuery from '~/apollo/queries/backgrounds/kids.gql'
   
   export default {
     components: {
       Head,
       Kids,
-    }, 
-    data() {
-      return {
-        background: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80'
-      }
-    }, 
+    },
     apollo: {
       workouts: {
         prefetch: true, 
@@ -39,6 +35,10 @@
       days: {
         prefetch: true, 
         query: daysQuery
+      }, 
+      background: {
+        prefetch: true, 
+        query: backgroundQuery
       }
     }
   }

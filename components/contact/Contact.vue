@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="contact" ref="contact">
     <div class="contact__form main">
       <div class="contact__form-header header">
         Napisz do nas
@@ -8,7 +8,7 @@
         Chciałbyś o coś zapytać, zwrócić na coś uwagę lub zaproponować współpracę? Poniższy formularz jest właśnie dla Ciebie! Wyślij nam wiadomość, a my odpiszemy tak szybko, jak tylko możliwe. Nie zapomnij podać swojego adresu e-mail.
       </div>
       <form class="contact__form-fields">
-        <input class="contact__form-field" placeholder="Twój adres email" v-model="form.from" type="email" required>
+        <input class="contact__form-field" placeholder="Twój adres email" v-model="form.from" type="email" required ref="email">
         <input class="contact__form-field" placeholder="Temat" v-model="form.subject" type="text" required>
         <textarea class="contact__form-field" placeholder="Treść" rows="6" v-model="form.text" required></textarea>
         <button ref="formbutton" :disabled="form.loading" type="submit" class="button" @click.prevent="sendForm">Wyślij</button>
@@ -22,7 +22,7 @@
 
 <script>	
 	import Strapi from 'strapi-sdk-javascript';
-	const strapi = new Strapi('http://localhost:1337');
+	const strapi = new Strapi('http://hes-backend.herokuapp.com');
 
 	export default {
 		data() {
@@ -63,7 +63,15 @@
         })
         .catch(err => console.log(err));
 			}
-		}
+    }, 
+    mounted() {
+      if (this.$route.params.focusForm == true) {
+        this.$refs.email.focus();
+        setTimeout(() => {
+          this.$refs.contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        },);
+      }
+    }
 	};
 </script>
 

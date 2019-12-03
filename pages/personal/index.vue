@@ -9,7 +9,7 @@
           Personalne
         </template>
       </Head>
-      <PersonalTraining :coaches="coaches" v-if="coaches" />
+      <PersonalTraining :coaches="coaches" :questions="questions" v-if="coaches && questions" />
     </div>
   </client-only>
 </template>
@@ -18,22 +18,27 @@
   import Head from '~/components/fitness/Head'
   import PersonalTraining from '~/components/personal/PersonalTraining'
 
-  import coachesQuery from '~/apollo/queries/personals/coaches.gql'
+  import coachesQuery from '~/apollo/queries/coaches/coaches.gql'
+  import questionsQuery from '~/apollo/queries/personals/questions.gql'
+  import backgroundQuery from '~/apollo/queries/backgrounds/personal.gql'
   
   export default {
     components: {
       Head,
       PersonalTraining,
     },
-    data() {
-      return {
-        background: 'http://localhost:1337/uploads/242500bade134965b3b9591be06b36a1.jpg'
-      }
-    }, 
     apollo: {
       coaches: {
         prefetch: true, 
         query: coachesQuery
+      }, 
+      questions: {
+        prefetch: true, 
+        query: questionsQuery
+      }, 
+      background: {
+        prefetch: true, 
+        query: backgroundQuery
       }
     }
   }

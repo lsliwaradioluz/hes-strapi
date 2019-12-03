@@ -1,34 +1,34 @@
 <template>
   <client-only>
-    <nav id="header" :class="{ 'is-triggered': scroll }">
-      <div class="header__icons">
+    <nav class="navigation" :class="{ 'is-triggered': scroll }">
+      <div class="navigation__icons">
         <transition name="rotate" mode="out-in">
           <font-awesome-icon class="icon hamburger" :key="icon" :icon="icon" @click.stop="toggleNav" />
         </transition>
-        <nuxt-link to="/" tag="div" class="header__icons-logo">
+        <nuxt-link to="/" tag="div" class="navigation__icons-logo" :style="{ backgroundImage: `url('${background.image.url}')` }">
           <img class="logo" src="http://hesgym.pl/logo.png">
         </nuxt-link>
       </div>
       <transition name="slide">
-        <ul class="header__navigation black" v-if="navbarToggled">
-          <div class="header__navigation-link" @click.self="toggleSubnav">
+        <ul class="navigation__navigation black" v-if="navbarToggled">
+          <div class="navigation__navigation-link" @click.self="toggleSubnav">
             Fitness
-            <ul class="header__navigation-subheader" @click="toggleNav">
-              <nuxt-link to="/fitness/workouts" tag="li" class="header__navigation-subheader__link">Zajęcia</nuxt-link>
-              <nuxt-link to="/fitness/coaches" tag="li" class="header__navigation-subheader__link">Instruktorzy</nuxt-link>
+            <ul class="navigation__navigation-subnavigation" @click="toggleNav">
+              <nuxt-link to="/fitness/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
+              <nuxt-link to="/fitness/coaches" tag="li" class="navigation__navigation-subnavigation__link">Instruktorzy</nuxt-link>
             </ul>
           </div>
-          <div class="header__navigation-link" @click.self="toggleSubnav">
+          <div class="navigation__navigation-link" @click.self="toggleSubnav">
             Cross
-            <ul class="header__navigation-subheader" @click="toggleNav">
-              <nuxt-link to="/cross/workouts" tag="li" class="header__navigation-subheader__link">Zajęcia</nuxt-link>
-              <nuxt-link to="/cross/coaches" tag="li" class="header__navigation-subheader__link">Trenerzy</nuxt-link>
+            <ul class="navigation__navigation-subnavigation" @click="toggleNav">
+              <nuxt-link to="/cross/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
+              <nuxt-link to="/cross/coaches" tag="li" class="navigation__navigation-subnavigation__link">Trenerzy</nuxt-link>
             </ul>
           </div>
-          <nuxt-link to="/kids" tag="li" class="header__navigation-link" @click.native="toggleNav">Kids</nuxt-link>
-          <nuxt-link to="/personal" tag="li" class="header__navigation-link" @click.native="toggleNav">Treningi personalne</nuxt-link>
-          <a href="https://akvit-aneta-komendera.business.site/" target="_blank" class="header__navigation-link">Dietetyk</a>
-          <nuxt-link to="/contact" tag="li" class="header__navigation-link" @click.native="toggleNav">Kontakt</nuxt-link>
+          <nuxt-link to="/kids" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kids</nuxt-link>
+          <nuxt-link to="/personal" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Treningi personalne</nuxt-link>
+          <a href="https://akvit-aneta-komendera.business.site/" target="_blank" class="navigation__navigation-link">Dietetyk</a>
+          <nuxt-link to="/contact" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kontakt</nuxt-link>
         </ul>
       </transition>
 	  </nav>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import logoQuery from '~/apollo/queries/backgrounds/logo.gql'
 
   export default {
     data() {
@@ -57,6 +58,12 @@
         event.target.children[0].classList.toggle('toggled');
       }
     },
+    apollo: {
+      background: {
+        prefetch: true, 
+        query: logoQuery
+      }
+    },
     mounted() {
       window.addEventListener('scroll', () => {
         window.scrollY > 0 ? this.scroll = true : this.scroll = false;
@@ -67,7 +74,7 @@
 
 <style scoped>
 
-  #header {
+  .navigation {
     position: fixed;
     padding: 1rem 10vw;
     top: 0;
@@ -76,14 +83,13 @@
     transition: all 0.3s;
   }
 
-  .header__icons {
+  .navigation__icons {
     display: flex;
     justify-content: space-between; 
     align-items: center;
   }
 
-  .header__icons-logo {
-    background-image: url('http://localhost:1337/uploads/9a8c8bf9e3e84a489089f705ea9d95c6.png');
+  .navigation__icons-logo {
     background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;
@@ -91,7 +97,7 @@
     top: 0;
     right: 10vw;
     padding-top: 1rem;
-    height: 40vh;
+    height: 10rem;
   }
 
   .hamburger,
@@ -110,7 +116,7 @@
     z-index: 0;
   }
 
-  .header__navigation {
+  .navigation__navigation {
     height: 100vh;
     width: 100%;
     padding: 0 3vw;
@@ -124,7 +130,7 @@
     flex-direction: column;
   }
 
-  .header__navigation-link {
+  .navigation__navigation-link {
     list-style: none;
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
@@ -135,7 +141,7 @@
     cursor: pointer;
   }
 
-  .header__navigation-subheader {
+  .navigation__navigation-subnavigation {
     max-height: 0;
     overflow: hidden;
     transition: max-height 1s;
@@ -143,25 +149,25 @@
     margin: 0;
   }
 
-  .header__navigation-subheader__link {
+  .navigation__navigation-subnavigation__link {
     font-size: 1rem;
     text-align: center;
   }
 
   @media (min-width: 768px) {
 
-    .header__navigation-link {
+    .navigation__navigation-link {
       width: 40%;
     }
 
-    .header__icons-logo {
+    .navigation__icons-logo {
       right: 10vw;
     }
   }
 
   @media (min-width: 1024px) {
 
-    #header {
+    .navigation {
       padding-top: 2rem;
       padding-bottom: 2rem;
     }
@@ -173,6 +179,8 @@
 
   .is-triggered {
     background-color: black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
   
 </style>

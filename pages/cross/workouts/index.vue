@@ -22,13 +22,9 @@
 
   import daysQuery from '~/apollo/queries/days.gql'
   import workoutsQuery from '~/apollo/queries/workouts/workouts.gql'
+  import backgroundQuery from '~/apollo/queries/backgrounds/cross.gql'
 
   export default {
-    data() {
-      return {
-        background: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80'
-      }
-    },
     components: {
       Head,
       Schedule, 
@@ -42,6 +38,10 @@
       workouts: {
         prefetch: true, 
         query: workoutsQuery
+      }, 
+      background: {
+        prefetch: true, 
+        query: backgroundQuery
       }
     }
   }

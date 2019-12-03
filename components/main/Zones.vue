@@ -10,7 +10,7 @@
           <div class="zone__details-subheader">
             {{ zone.subheader }}
           </div>
-          <nuxt-link tag="div" class="zone__details-button button" :to="`/${zone.name}`">
+          <nuxt-link tag="div" class="zone__details-button button" :to="{ name: `${generateButtonLink(zone.name)}`, params: { focusForm: true }}">
             {{ generateButtonCaption(zone.name) }}
           </nuxt-link>
         </div>
@@ -41,6 +41,25 @@ export default {
           break
         case 'personal training':
           return 'Umów się na bezpłatny trening'
+      }
+    },
+    generateButtonLink(zone) {
+      const zoneLowerCase = zone.toLowerCase();
+      switch(zoneLowerCase) {
+        case 'gym':
+          return 'contact';
+          break
+        case 'fitness': 
+          return 'fitness/workouts';
+          break
+        case 'cross':
+          return 'cross/coaches';
+          break
+        case 'kids':
+          return 'kids';
+          break
+        case 'personal training':
+          return 'personal'
       }
     }
   }

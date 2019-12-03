@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <div>
-      <LandingPage />
+      <LandingPage :backgrounds="backgrounds" v-if="backgrounds" />
       <Memberships :memberships="memberships" v-if="memberships" />
       <Zones :zones="zones" v-if="zones" />
       <Facilities :facilities="facilities" v-if="facilities" />
@@ -15,6 +15,7 @@
   import Zones from '~/components/main/Zones.vue'
   import Facilities from '~/components/main/Facilities.vue'
 
+  import backgroundsQuery from '~/apollo/queries/backgrounds/backgrounds.gql'
   import membershipsQuery from '~/apollo/queries/memberships.gql'
   import zonesQuery from '~/apollo/queries/zones.gql'
   import facilitiesQuery from '~/apollo/queries/facilities.gql'
@@ -25,7 +26,7 @@
       Memberships, 
       Zones, 
       Facilities, 
-    }, 
+    },
     apollo: {
       memberships: {
         prefetch: true, 
@@ -38,7 +39,11 @@
       facilities: {
         prefetch: true, 
         query: facilitiesQuery
-      }
+      },
+      backgrounds: {
+        prefetch: true, 
+        query: backgroundsQuery
+      },
     }
   }
 </script>

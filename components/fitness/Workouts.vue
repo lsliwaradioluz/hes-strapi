@@ -14,7 +14,7 @@
           <h3 class="workouts__tab-header">
             {{ workout.name }}
           </h3>
-          <p class="workouts__tab-subheader text-red">
+          <p class="workouts__tab-subheader text-red" v-if="zone == 'fitness'">
             {{ workout.type }}
           </p>
         </div>
