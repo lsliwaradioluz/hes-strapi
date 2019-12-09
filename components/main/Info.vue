@@ -10,6 +10,7 @@
       </div>
     </transition>
     <div class="info__tag" @click="showInfo">
+      <span class="info__tag-text">Aktualności</span>
       <font-awesome-icon class="icon" icon="angle-double-down" ref="icon" />
     </div>
   </div>
@@ -45,13 +46,11 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        if (this.$refs.info.style.transform == "") this.showInfo();
-        this.interval = setInterval(() => {
-          this.current++
-          if (this.current == this.infos.length) this.current = 0;
-        }, 5000);
-      }, 3000);
+      console.log(window.innerWidth);
+      this.interval = setInterval(() => {
+        this.current++
+        if (this.current == this.infos.length) this.current = 0;
+      }, 5000);
     }, 
     destroyed() {
       clearInterval(this.interval);
@@ -117,6 +116,10 @@
     cursor: pointer;
     border-top-left-radius: 5px;
   }
+
+  .info__tag-text {
+    display: none;
+  }
   
   .icon {
     height: 1rem;
@@ -133,6 +136,10 @@
 
     .info__close {
       display: none;
+    }
+
+    .info__tag-text {
+      display: inline;
     }
   }
 </style>
