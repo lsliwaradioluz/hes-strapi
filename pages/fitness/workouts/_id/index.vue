@@ -1,35 +1,29 @@
 <template>
-  <client-only>
-    <div>
-      <Workout :workout="workout" :days="days" v-if="workout && days" />
-    </div>
-  </client-only>
+  <div>
+    <Workout :workout="workout" :days="days" />
+  </div>
 </template>
 
 <script>
   import Workout from '~/components/fitness/Workout'
 
-  import workoutQuery from '~/apollo/queries/workouts/workout.gql'
-  import daysQuery from '~/apollo/queries/days.gql'
+  import fitnessWorkoutQuery from '~/apollo/queries/fitness/workouts/fitnessWorkout.gql';
 
   export default {
     layout: 'detailPage',
     components: {
       Workout
     },
-    apollo: {
-      workout: {
-        prefetch: true, 
-        query: workoutQuery,
-        variables() {
-          return { id: this.$route.params.id }
-        }
-      }, 
-      days: {
-        prefetch: true, 
-        query: daysQuery
-      }
-    }
+    asyncData(context) {
+      let client = context.app.apolloProvider.defaultClient;
+      return client.query({ query: fitnessWorkoutQuery, variables: { id: context.route.params.id } })
+        .then(({ data }) => {
+          return {
+            workout: data.workout, 
+            days: data.days
+          }
+        });
+    },
   }
 </script>
 

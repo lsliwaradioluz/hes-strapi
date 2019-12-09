@@ -1,34 +1,28 @@
 <template>
-  <client-only>
-    <div>
-      <Workout :workout="workout" :days="days" zone="cross" v-if="workout && days" />
-    </div>
-  </client-only>
+  <div>
+    <Workout :workout="workout" :days="days" zone="cross" />
+  </div>
 </template>
 
 <script>
   import Workout from '~/components/fitness/Workout'
-  import workoutQuery from '~/apollo/queries/workouts/workout.gql'
-  import daysQuery from '~/apollo/queries/days.gql'
+  import crossWorkoutQuery from '~/apollo/queries/cross/workouts/crossWorkout.gql';
 
   export default {
     layout: 'detailPage',
     components: {
       Workout
     },
-    apollo: {
-      workout: {
-        prefetch: true, 
-        query: workoutQuery,
-        variables() {
-          return { id: this.$route.params.id }
-        }
-      }, 
-      days: {
-        prefetch: true, 
-        query: daysQuery
-      }
-    }
+    asyncData(context) {
+      let client = context.app.apolloProvider.defaultClient;
+      return client.query({ query: crossWorkoutQuery, variables: { id: context.route.params.id } })
+        .then(({ data }) => {
+          return {
+            workout: data.workout, 
+            days: data.days
+          }
+        });
+    },
   }
 </script>
 

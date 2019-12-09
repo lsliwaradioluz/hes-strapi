@@ -1,0 +1,33 @@
+query fitnessWorkouts {
+  background(id: "5de63fc875545300179a47d3") {
+    id
+    name
+    image {
+      url
+    }
+  }
+  days {
+    id
+    name
+    fitness {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+  }
+  workouts {
+    id
+    name
+    type
+    zone
+    description
+    image {
+      url
+    }
+  }
+}

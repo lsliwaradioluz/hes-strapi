@@ -1,3 +1,11 @@
+.accordion-enter-active {
+  animation: accordion 0.3s;
+}
+
+.accordion-leave-active {
+  animation: accordion 0.3s reverse;
+}
+
 @keyframes accordion {
   from {
     max-height: 0;
@@ -5,14 +13,6 @@
   to {
     max-height: 600px;
   }
-}
-
-.accordion-enter-active {
-  animation: accordion 0.3s;
-}
-
-.accordion-leave-active {
-  animation: accordion 0.3s reverse;
 }
 
 .slide-enter-active {
@@ -67,6 +67,19 @@
   }
 }
 
+.slide-hor-leave-active {
+  animation: slide-hor-left 0.8s;
+}
+
+@keyframes slide-hor-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @keyframes slide-right {
   0% {
     transform: translateX(-100%);
@@ -76,6 +89,23 @@
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+.fade-enter-active {
+  animation: fade 0.3s;
+}
+
+.fade-leave-active {
+  animation: fade 0.3s reverse;
+}
+
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
   }
 }
 

@@ -1,9 +1,0 @@
-query Backgrounds {
-  backgrounds {
-    id
-    name
-    image {
-      url
-    }
-  }
-}

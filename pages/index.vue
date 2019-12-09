@@ -1,12 +1,11 @@
 <template>
-  <client-only>
-    <div>
-      <LandingPage :backgrounds="backgrounds" v-if="backgrounds" />
-      <Memberships :memberships="memberships" v-if="memberships" />
-      <Zones :zones="zones" v-if="zones" />
-      <Facilities :facilities="facilities" v-if="facilities" />
-    </div>
-  </client-only>
+  <div>
+    <LandingPage :background="background" />
+    <Memberships :memberships="memberships" />
+    <Zones :zones="zones" />
+    <Facilities :facilities="facilities" />
+    <Info :infos="infos" />
+  </div>
 </template>
 
 <script>
@@ -14,11 +13,9 @@
   import Memberships from '~/components/main/Memberships.vue'
   import Zones from '~/components/main/Zones.vue'
   import Facilities from '~/components/main/Facilities.vue'
+  import Info from '~/components/main/Info.vue'
 
-  import backgroundsQuery from '~/apollo/queries/backgrounds/backgrounds.gql'
-  import membershipsQuery from '~/apollo/queries/memberships.gql'
-  import zonesQuery from '~/apollo/queries/zones.gql'
-  import facilitiesQuery from '~/apollo/queries/facilities.gql'
+  import mainQuery from '~/apollo/queries/main/mainQuery.gql'
   
   export default {
     components: {
@@ -26,24 +23,20 @@
       Memberships, 
       Zones, 
       Facilities, 
+      Info
     },
-    apollo: {
-      memberships: {
-        prefetch: true, 
-        query: membershipsQuery
-      },
-      zones: {
-        prefetch: true, 
-        query: zonesQuery
-      },
-      facilities: {
-        prefetch: true, 
-        query: facilitiesQuery
-      },
-      backgrounds: {
-        prefetch: true, 
-        query: backgroundsQuery
-      },
-    }
+    asyncData(context) {
+      let client = context.app.apolloProvider.defaultClient;
+      return client.query({ query: mainQuery })
+        .then(({ data }) => {
+          return {
+            background: data.background, 
+            memberships: data.memberships,
+            zones: data.zones, 
+            facilities: data.facilities, 
+            infos: data.infos
+          }
+        });
+    },
   }
 </script>

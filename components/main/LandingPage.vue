@@ -17,16 +17,7 @@
 <script>
 
   export default {
-    props: ['backgrounds'],
-    computed: {
-      background() {
-        const background = this.backgrounds.filter(background => {
-          return background.name == 'main';
-        });
-        
-        return background[0];
-      }
-    }
+    props: ['background']
   };
 </script>
 

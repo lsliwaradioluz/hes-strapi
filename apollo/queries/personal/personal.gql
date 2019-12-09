@@ -1,0 +1,27 @@
+query personal {
+  background(id: "5de59069a9b9fa0017cc4206") {
+    id
+    name
+    image {
+      url
+    }
+  }
+  questions {
+    id 
+    question
+    answer
+  }
+  coaches {
+    id
+    name
+    description
+    personal
+    image {
+      url
+    }
+    workouts {
+      name
+      zone
+    }
+  } 
+}

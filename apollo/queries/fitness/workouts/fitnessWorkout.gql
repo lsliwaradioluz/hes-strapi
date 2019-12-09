@@ -1,17 +1,17 @@
-query Days {
+query fitnessWorkout($id: ID!) {
+  workout(id: $id) {
+   id
+    name
+    type
+    time
+    description
+    image {
+      url
+    }
+  }
   days {
     id
     name
-    cross {
-      class {
-        name
-        type
-        time
-      }
-      id
-      hours
-      minutes
-    }
     fitness {
       class {
         name

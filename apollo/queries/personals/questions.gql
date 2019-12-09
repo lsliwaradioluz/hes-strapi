@@ -1,7 +1,0 @@
-query Questions {
-  questions {
-    id 
-    question
-    answer
-  }
-}

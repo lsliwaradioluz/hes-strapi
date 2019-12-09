@@ -1,48 +1,45 @@
 <template>
-  <client-only>
-    <nav class="navigation" :class="{ 'is-triggered': scroll }">
-      <div class="navigation__icons">
-        <transition name="rotate" mode="out-in">
-          <font-awesome-icon class="icon hamburger" :key="icon" :icon="icon" @click.stop="toggleNav" />
-        </transition>
-        <nuxt-link to="/" tag="div" class="navigation__icons-logo" :style="{ backgroundImage: `url('${background.image.url}')` }">
-          <img class="logo" src="http://hesgym.pl/logo.png">
-        </nuxt-link>
-      </div>
-      <transition name="slide">
-        <ul class="navigation__navigation black" v-if="navbarToggled">
-          <div class="navigation__navigation-link" @click.self="toggleSubnav">
-            Fitness
-            <ul class="navigation__navigation-subnavigation" @click="toggleNav">
-              <nuxt-link to="/fitness/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
-              <nuxt-link to="/fitness/coaches" tag="li" class="navigation__navigation-subnavigation__link">Instruktorzy</nuxt-link>
-            </ul>
-          </div>
-          <div class="navigation__navigation-link" @click.self="toggleSubnav">
-            Cross
-            <ul class="navigation__navigation-subnavigation" @click="toggleNav">
-              <nuxt-link to="/cross/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
-              <nuxt-link to="/cross/coaches" tag="li" class="navigation__navigation-subnavigation__link">Trenerzy</nuxt-link>
-            </ul>
-          </div>
-          <nuxt-link to="/kids" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kids</nuxt-link>
-          <nuxt-link to="/personal" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Treningi personalne</nuxt-link>
-          <a href="https://akvit-aneta-komendera.business.site/" target="_blank" class="navigation__navigation-link">Dietetyk</a>
-          <nuxt-link to="/contact" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kontakt</nuxt-link>
-        </ul>
+  <nav class="navigation">
+    <div class="navigation__icons">
+      <transition name="rotate" mode="out-in">
+        <font-awesome-icon class="icon hamburger" :key="icon" :icon="icon" @click.stop="toggleNav" />
       </transition>
-	  </nav>
-  </client-only>
+      <nuxt-link to="/" tag="div" class="navigation__icons-logo" :style="{ backgroundImage: `url('${background.image.url}')` }">
+        <img class="logo" src="http://hesgym.pl/logo.png">
+      </nuxt-link>
+    </div>
+    <transition name="slide">
+      <ul class="navigation__navigation black" v-if="navbarToggled">
+        <div class="navigation__navigation-link" @click.self="toggleSubnav">
+          Fitness
+          <ul class="navigation__navigation-subnavigation" @click="toggleNav">
+            <nuxt-link to="/fitness/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
+            <nuxt-link to="/fitness/coaches" tag="li" class="navigation__navigation-subnavigation__link">Instruktorzy</nuxt-link>
+          </ul>
+        </div>
+        <div class="navigation__navigation-link" @click.self="toggleSubnav">
+          Cross
+          <ul class="navigation__navigation-subnavigation" @click="toggleNav">
+            <nuxt-link to="/cross/workouts" tag="li" class="navigation__navigation-subnavigation__link">Zajęcia</nuxt-link>
+            <nuxt-link to="/cross/coaches" tag="li" class="navigation__navigation-subnavigation__link">Trenerzy</nuxt-link>
+          </ul>
+        </div>
+        <nuxt-link to="/kids" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kids</nuxt-link>
+        <nuxt-link to="/personal" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Treningi personalne</nuxt-link>
+        <a href="https://akvit-aneta-komendera.business.site/" target="_blank" class="navigation__navigation-link">Dietetyk</a>
+        <nuxt-link to="/contact" tag="li" class="navigation__navigation-link" @click.native="toggleNav">Kontakt</nuxt-link>
+      </ul>
+    </transition>
+  </nav>
 </template>
 
 <script>
-  import logoQuery from '~/apollo/queries/backgrounds/logo.gql'
+  import logoQuery from '~/apollo/queries/logo/logo.gql'
 
   export default {
     data() {
       return {
-        navbarToggled: false,
-        scroll: false
+        navbarToggled: false
       }
     },
     computed: {
@@ -64,11 +61,11 @@
         query: logoQuery
       }
     },
-    mounted() {
-      window.addEventListener('scroll', () => {
-        window.scrollY > 0 ? this.scroll = true : this.scroll = false;
-      })
-    }
+    // mounted() {
+    //   window.addEventListener('scroll', () => {
+    //     window.scrollY > 0 ? this.scroll = true : this.scroll = false;
+    //   })
+    // }
   };
 </script>  
 
@@ -109,11 +106,7 @@
   }
 
   .logo {
-    height: 4rem;
-  }
-
-  .cross {
-    z-index: 0;
+    height: 2rem;
   }
 
   .navigation__navigation {
@@ -171,16 +164,14 @@
       padding-top: 2rem;
       padding-bottom: 2rem;
     }
+
+    .logo {
+      height: 4rem;
+    }
   }
 
   .toggled {
     max-height: 500px;
-  }
-
-  .is-triggered {
-    background-color: black;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
   }
   
 </style>

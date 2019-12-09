@@ -1,9 +1,0 @@
-query getBackgrounds ($id: ID = "5de63fc875545300179a47d3") {
-  background(id: $id) {
-      id
-      name
-      image {
-        url
-      }
-    } 
-}

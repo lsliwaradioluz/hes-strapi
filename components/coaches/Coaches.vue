@@ -8,7 +8,7 @@
         <div class="coach__details">
           <div class="coach__details-name">{{ coach.name }}</div>
           <div class="coach__details-workouts">
-            <span v-for="(workout, index) in filterWorkouts(coach.workouts)" :key="index">{{ workout.name }} </span>
+            <span v-for="(workout, index) in filterWorkouts(coach.workouts)" :key="index">{{ workout.name }}. </span>
           </div>
           <font-awesome-icon class="icon" icon="angle-double-down" @click="toggleDescription(coach.id)" :ref="`toggleButton${coach.id}`" />
           <div class="coach__details-description" :ref="`description${coach.id}`">{{ coach.description }}</div>

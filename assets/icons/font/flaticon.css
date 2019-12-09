@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 22/11/2019 10:51
+  	Creation date: 09/12/2019 12:56
   	*/
 
 @font-face {
@@ -25,12 +25,15 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
+  font-size: 5rem;
   font-style: normal;
-  font-size: 4rem;
+  color: white;
 }
 
-.flaticon-envelope:before { content: "\f100"; }
-.flaticon-mission:before { content: "\f101"; }
-.flaticon-team:before { content: "\f102"; }
-.flaticon-document:before { content: "\f103"; }
-.flaticon-think:before { content: "\f104"; }
+.flaticon-workout:before { content: "\f100"; }
+.flaticon-running:before { content: "\f101"; }
+.flaticon-gym:before { content: "\f102"; }
+.flaticon-weightlifting:before { content: "\f103"; }
+.flaticon-gymnast:before { content: "\f104"; }
+.flaticon-gym-1:before { content: "\f105"; }
+.flaticon-child:before { content: "\f106"; }

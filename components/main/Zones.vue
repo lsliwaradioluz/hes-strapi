@@ -10,7 +10,7 @@
           <div class="zone__details-subheader">
             {{ zone.subheader }}
           </div>
-          <nuxt-link tag="div" class="zone__details-button button" :to="{ name: `${generateButtonLink(zone.name)}`, params: { focusForm: true }}">
+          <nuxt-link tag="div" class="zone__details-button button" :to="{ path: `${generateButtonLink(zone.name)}`, params: { focusForm: true }}">
             {{ generateButtonCaption(zone.name) }}
           </nuxt-link>
         </div>

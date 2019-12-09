@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 22/11/2019 10:51
+    Creation date: 09/12/2019 12:56
     */
 
     @font-face {
@@ -37,14 +37,18 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-envelope:before { content: "\f100"; }
-.flaticon-mission:before { content: "\f101"; }
-.flaticon-team:before { content: "\f102"; }
-.flaticon-document:before { content: "\f103"; }
-.flaticon-think:before { content: "\f104"; }
+    .flaticon-workout:before { content: "\f100"; }
+.flaticon-running:before { content: "\f101"; }
+.flaticon-gym:before { content: "\f102"; }
+.flaticon-weightlifting:before { content: "\f103"; }
+.flaticon-gymnast:before { content: "\f104"; }
+.flaticon-gym-1:before { content: "\f105"; }
+.flaticon-child:before { content: "\f106"; }
     
-    $font-Flaticon-envelope: "\f100";
-    $font-Flaticon-mission: "\f101";
-    $font-Flaticon-team: "\f102";
-    $font-Flaticon-document: "\f103";
-    $font-Flaticon-think: "\f104";
+    $font-Flaticon-workout: "\f100";
+    $font-Flaticon-running: "\f101";
+    $font-Flaticon-gym: "\f102";
+    $font-Flaticon-weightlifting: "\f103";
+    $font-Flaticon-gymnast: "\f104";
+    $font-Flaticon-gym-1: "\f105";
+    $font-Flaticon-child: "\f106";

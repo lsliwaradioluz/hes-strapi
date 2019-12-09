@@ -1,11 +1,17 @@
-query Coaches {
+query fitnessCoaches {
+  background(id: "5de63fc875545300179a47d3") {
+    id
+    name
+    image {
+      url
+    }
+  }
   coaches {
     id
     name
     description
     fitness
     cross
-    personal
     image {
       url
     }
@@ -13,5 +19,5 @@ query Coaches {
       name
       zone
     }
-  }
+  } 
 }

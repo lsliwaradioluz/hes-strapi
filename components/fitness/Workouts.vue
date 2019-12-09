@@ -9,8 +9,10 @@
           class="workouts__tab" 
           ref="tab"
           v-for="(workout, index) in filteredWorkouts" 
-          :key="workout.id + index"
-          :style="{ backgroundImage: `url('${setBackground(workout.type)}')` }">
+          :key="workout.id + index">
+          <div class="workouts__tab-icon">
+            <i :class="`flaticon-${setBackground(workout.type)}`"></i>
+          </div>
           <h3 class="workouts__tab-header">
             {{ workout.name }}
           </h3>
@@ -52,25 +54,25 @@
       setBackground(type) {
         switch(type) {
           case 'wzmacnianie':
-            return 'http://localhost:1337/uploads/e098659306534604b994715a735be7e2.svg';
+            return 'weightlifting';
             break
           case 'cardio':
-            return 'http://localhost:1337/uploads/53fb6729922a45179e940d116f22e4cc.svg';
+            return 'running';
             break
           case 'mental':
-            return 'http://localhost:1337/uploads/170ee6bf6ba64c90946e9a9a27ac40a9.svg';
+            return 'workout';
             break
           case 'beginners':
-            return 'http://localhost:1337/uploads/5a586b682122452b99833b104de07818.svg';
+            return 'gym';
             break
           case 'intro':
-            return 'http://localhost:1337/uploads/43c49cafe8dc420d9c93804c43855107.svg';
+            return 'gym-1';
             break
           case 'advanced':
-            return 'http://localhost:1337/uploads/6b4b9c7508c442e384bae89b6c44f49a.svg';
+            return 'gymnast';
             break
           case 'kids':
-            return 'http://localhost:1337/uploads/8433532643dc4893954221f40cbad770.svg'; 
+            return 'child'; 
         }
       }, 
       slideworkouts() {
@@ -134,9 +136,6 @@
   }
 
   .workouts__tab {
-    background-size: 30%;
-    background-repeat: no-repeat;
-    background-position: center center;
     padding: 1rem;
     height: 80vw;
     width: 100%;
@@ -148,6 +147,18 @@
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
+  }
+
+  .workouts__tab-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
   }
 
   .workouts__tab:last-child {

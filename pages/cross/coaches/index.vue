@@ -1,40 +1,37 @@
 <template>
-  <client-only>
-    <div>
-      <Head :background="background">
-        <template v-slot:section>
-          cross
-        </template>
-        <template v-slot:subsection>
-          trenerzy
-        </template>
-      </Head>
-      <Coaches :coaches="coaches" zone="cross" v-if="coaches" />
-    </div>   
-  </client-only>
+  <div>
+    <Head :background="background">
+      <template v-slot:section>
+        cross
+      </template>
+      <template v-slot:subsection>
+        trenerzy
+      </template>
+    </Head>
+    <Coaches :coaches="coaches" zone="cross" />
+  </div>  
 </template>
 
 <script>
   import Head from '~/components/fitness/Head'
   import Coaches from '~/components/coaches/Coaches'
 
-  import coachesQuery from '~/apollo/queries/coaches/coaches.gql'
-  import backgroundQuery from '~/apollo/queries/backgrounds/cross.gql'
+  import crossCoachesQuery from '~/apollo/queries/cross/coaches/crossCoaches.gql'
 
   export default {
     components: {
       Head,
       Coaches
-    }, 
-    apollo: {
-      coaches: {
-        prefetch: true, 
-        query: coachesQuery
-      }, 
-      background: {
-        prefetch: true, 
-        query: backgroundQuery
-      }
-    }
+    },
+    asyncData(context) {
+      let client = context.app.apolloProvider.defaultClient;
+      return client.query({ query: crossCoachesQuery })
+        .then(({ data }) => {
+          return {
+            background: data.background, 
+            coaches: data.coaches
+          }
+        });
+    },
   }
 </script>
