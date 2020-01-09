@@ -13,9 +13,9 @@
 <script>
   import mainQuery from '~/apollo/queries/fitness/main.gql'
   
-  import Workouts from '~/components/fitness/Workouts'
-  import Schedule from '~/components/fitness/Schedule'
-  import Coaches from '~/components/fitness/Coaches'
+  import Workouts from '~/components/shared/Workouts'
+  import Schedule from '~/components/shared/Schedule'
+  import Coaches from '~/components/shared/Coaches'
 
   export default {
     components: {
