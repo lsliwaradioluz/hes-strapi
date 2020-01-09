@@ -1,0 +1,31 @@
+query mainQuery {
+  facilities {
+    id 
+    header
+    subheader
+    image {
+      url
+    }
+  }
+  zones {
+    id
+    name
+    header
+    subheader
+    image {
+      url
+    }
+  }
+  memberships {
+    id
+    name
+    price
+    description
+  }
+  infos {
+    id
+    header
+    subheader
+    link
+  }
+}

@@ -1,0 +1,146 @@
+@function color($color-name) {
+  @return map-get($colors, $color-name)
+}
+
+$colors: (
+  blue: #33b1ef,
+  lightblue: lighten(#0079b5, 10%),
+  darkblue: #0079b5,
+  pink: #A700FE,
+  black: #161515,
+  lightblack: #545353,
+  gray: #7a7a7a,
+  lightgray: #F4F4F4,
+  gold: #ce9170,
+  yellow: #FDE74C
+);
+
+* {
+  box-sizing: border-box;
+}
+    
+html, body {
+  margin: 0;
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+  color: #FDFFFC;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #FDFFFC;
+  display: block;
+}
+
+ul {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1, p {
+  margin: 0.5rem 0;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+  line-height: 1;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: color(black);
+  font-size: 2rem;
+  margin: 0 0 .5rem 0;
+  position: relative;
+  margin-bottom: 77px;
+  line-height: 1.1;
+
+  &::before,
+  &::after  {
+    content: "------------------------";
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background-image: url('~assets/images/barbell.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    letter-spacing: -2px;
+    color: color(blue);
+    font-size: 12px;
+    height: 32px;
+    width: 100%;
+    padding-left: calc(50% - 100px);
+    position: absolute;
+    bottom: -45px;
+    left: 0;
+  }
+
+  &::after {
+    background-image: none;
+    justify-content: flex-end;
+    padding-left: 0;
+    padding-right: calc(50% - 100px);
+  }
+}
+
+h3 {
+  color: white;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: color(blue);
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+.t-centered {
+  text-align: center;
+}
+
+.t-left {
+  text-align: left;
+}
+
+.t-right {
+  text-align: right;
+}
+
+.t-justify {
+  text-align: justify;
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+}

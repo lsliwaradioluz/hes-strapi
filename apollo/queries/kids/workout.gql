@@ -1,0 +1,40 @@
+query workout($id: ID!) {
+  workout(id: $id) {
+    id
+    name
+    type
+    time
+    description
+    zone
+    image {
+      url
+    }
+    coaches {
+      name
+    }
+  }
+  workouts {
+    id
+    name
+    type
+    zone
+    description
+    image {
+      url
+    }
+  }
+  days {
+    id
+    name
+    cross {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+  }
+}

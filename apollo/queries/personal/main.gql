@@ -1,0 +1,20 @@
+query personal {
+  questions {
+    id 
+    question
+    answer
+  }
+  coaches {
+    id
+    name
+    description
+    personal
+    image {
+      url
+    }
+    workouts {
+      name
+      zone
+    }
+  } 
+}

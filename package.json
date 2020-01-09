@@ -11,15 +11,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@fortawesome/fontawesome": "^1.1.8",
-    "@fortawesome/fontawesome-free-brands": "^5.0.13",
-    "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-brands-svg-icons": "^5.11.2",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/vue-fontawesome": "^0.1.8",
     "@nuxtjs/apollo": "^4.0.0-rc18",
-    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/axios": "^5.9.2",
     "core-js": "^2.6.10",
     "graphql": "^14.5.8",
     "lodash.shuffle": "^4.2.0",
@@ -28,6 +21,9 @@
     "strapi-sdk-javascript": "^0.3.3"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
     "webpack": "^4.41.2"
   }
 }

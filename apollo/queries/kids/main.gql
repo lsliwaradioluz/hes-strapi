@@ -1,0 +1,33 @@
+query kids {
+  workouts {
+    id
+    name
+    type
+    zone
+    description
+    image {
+      url
+    }
+  }
+  days {
+    id
+    name
+    cross {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+  }
+  zones {
+    name
+    subheader
+    image {
+      url
+    }
+  }
+}

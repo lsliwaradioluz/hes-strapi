@@ -1,36 +1,34 @@
 <template>
   <div>
-    <LandingPage :background="background" />
-    <Memberships :memberships="memberships" />
+    <Landing :infos="infos" />
+    <About :facilities="facilities" />
     <Zones :zones="zones" />
-    <Facilities :facilities="facilities" />
-    <Info :infos="infos" />
+    <Memberships :memberships="memberships" />
   </div>
 </template>
 
 <script>
-  import LandingPage from '~/components/main/LandingPage.vue'
+  import Landing from '~/components/main/Landing.vue'
+  import About from '~/components/main/About.vue'
   import Memberships from '~/components/main/Memberships.vue'
   import Zones from '~/components/main/Zones.vue'
   import Facilities from '~/components/main/Facilities.vue'
-  import Info from '~/components/main/Info.vue'
 
-  import mainQuery from '~/apollo/queries/main/mainQuery.gql'
+  import mainQuery from '~/apollo/queries/main/main.gql'
   
   export default {
     components: {
-      LandingPage,
+      Landing,
+      About,
       Memberships, 
       Zones, 
-      Facilities, 
-      Info
+      Facilities,
     },
     asyncData(context) {
       let client = context.app.apolloProvider.defaultClient;
       return client.query({ query: mainQuery })
         .then(({ data }) => {
           return {
-            background: data.background, 
             memberships: data.memberships,
             zones: data.zones, 
             facilities: data.facilities, 

@@ -1,0 +1,40 @@
+query main {
+  workouts {
+    id
+    name
+    type
+    zone
+    description
+    image {
+      url
+    }
+  }
+  days {
+    id
+    name
+    fitness {
+      class {
+        name
+        type
+        time
+      }
+      id
+      hours
+      minutes
+    }
+  }
+  coaches {
+    id
+    name
+    description
+    fitness
+    cross
+    image {
+      url
+    }
+    workouts {
+      name
+      zone
+    }
+  } 
+}

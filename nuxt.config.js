@@ -1,5 +1,4 @@
 import webpack from 'webpack'
-require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -28,17 +27,19 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/styles/general.css',
-    '~/assets/styles/main.css',
+    '~/assets/styles/layout.scss',
+    '~/assets/styles/elements.scss',
+    '~/assets/styles/fonts.css',
     '~/assets/styles/animations.css',
-    '~/assets/styles/scrollbar.css',
-    '~/assets/icons/font/flaticon.css',
+    '~/assets/styles/general.scss',
+    '~/assets/styles/colors.scss',
+    '~/assets/icons/footernavbar/font/flaticon.css',
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/fontawesome.js',
+    '~/plugins/global.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,14 +51,23 @@ export default {
   */
   modules: [
     '@nuxtjs/apollo',
-    ['@nuxtjs/dotenv', { systemvars: true }],
+    '@nuxtjs/axios',
+    ['@nuxtjs/style-resources']
   ],
   apollo: {  
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.GRAPHQL_URL
+        httpEndpoint: process.env.NODE_ENV == 'development' ? 'http://localhost:1337/graphql' : 'https://hes-backend.herokuapp.com/graphql'
       }
     }
+  },
+  styleResources: {
+    scss: [
+      '~/assets/styles/general.scss',
+      '~/assets/styles/elements.scss',
+      '~/assets/styles/colors.scss',
+      '~/assets/styles/layout.scss',
+    ]
   },
   /*
   ** Build configuration

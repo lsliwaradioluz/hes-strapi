@@ -1,37 +1,29 @@
 <template>
   <div>
-    <Head :background="background">
-      <template v-slot:section>
-          kontakt
-        </template>
-        <template v-slot:subsection>
-        </template>
-    </Head>
-    <div class="contact">
-      <Contact />
-    </div>
+    <Head>Kontakt</Head>
+    <Contact :footers="footers" />
   </div>
 </template>
 
 <script>
-  import Head from '~/components/fitness/Head';
-  import Contact from '~/components/contact/Contact';
-
-  import contactQuery from '~/apollo/queries/contact/contactQuery.gql';
+  import Contact from '~/components/contact/Contact.vue'
+  import mainQuery from '~/apollo/queries/contact/main.gql'
 
   export default {
     components: {
-      Head,
       Contact,
     },
     asyncData(context) {
       let client = context.app.apolloProvider.defaultClient;
-      return client.query({ query: contactQuery })
+      return client.query({ query: mainQuery })
         .then(({ data }) => {
+          const filteredFooters = data.footers.filter(footer => {
+            return footer.name == 'Recepcja' || footer.name == 'Menadżer';
+          });
           return {
-            background: data.background
+            footers: filteredFooters
           }
         });
-    }
+    },
   }
 </script>

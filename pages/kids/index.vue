@@ -1,36 +1,43 @@
 <template>
   <div>
-    <Head :background="background">
-      <template v-slot:section>
-        Strefa
-      </template>
-      <template v-slot:subsection>
-        Kids
-      </template>
-    </Head>
-    <Kids :workouts="workouts" :days="days" zone="cross" />
+    <Head>Kids</Head>
+    <Kids :zone="zone" />
+    <Workouts :workouts="workouts" zone="kids" />
+    <Schedule :days="days" zone="cross" kids>
+      <template v-slot:subheader>Wypatruj żółtego!</template>
+      <template v-slot:header>Grafik zajęć</template>
+    </Schedule>
   </div>
 </template>
 
 <script>
-  import Head from '~/components/fitness/Head'
-  import Kids from '~/components/kids/Kids'
-
-  import kidsQuery from '~/apollo/queries/kids/kids.gql'
+  import mainQuery from '~/apollo/queries/kids/main.gql'
   
+  import Kids from '~/components/kids/Kids'
+  import Workouts from '~/components/shared/Workouts'
+  import Schedule from '~/components/shared/Schedule'
+
   export default {
     components: {
-      Head,
       Kids,
+      Workouts, 
+      Schedule,
     },
     asyncData(context) {
       let client = context.app.apolloProvider.defaultClient;
-      return client.query({ query: kidsQuery })
+      return client.query({ query: mainQuery })
         .then(({ data }) => {
+          const filteredWorkouts = data.workouts.filter(workout => {
+            return workout.type == 'kids';
+          });
+          const kidzone = data.zones.filter(zone => {
+            return zone.name == 'kids';
+          });
+
           return {
-            background: data.background, 
+            workouts: filteredWorkouts,
             days: data.days, 
-            workouts: data.workouts
+            zone: kidzone[0]
           }
         });
     },

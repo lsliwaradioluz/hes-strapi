@@ -1,32 +1,37 @@
 <template>
   <div>
-    <Head :background="background">
-      <template v-slot:section>Treningi</template>
-      <template v-slot:subsection>Personalne</template>
-    </Head>
-    <PersonalTraining :coaches="coaches" :questions="questions" />
+    <Head>personal training</Head>
+    <Personal />
+    <Coaches :coaches="coaches" zone="personal" />
+    <Questions :questions="questions" />
   </div>
 </template>
 
 <script>
-import Head from "~/components/fitness/Head";
-import PersonalTraining from "~/components/personal/PersonalTraining"
-
-import personalQuery from "~/apollo/queries/personal/personal.gql"
+import Personal from "~/components/personal/Personal"
+import Questions from "~/components/personal/Questions"
+import Coaches from '~/components/shared/Coaches'
+import mainQuery from "~/apollo/queries/personal/main.gql"
 
 export default {
   components: {
-    Head,
-    PersonalTraining
+    Personal,
+    Coaches,
+    Questions
   },
   asyncData(context) {
     let client = context.app.apolloProvider.defaultClient;
-    return client.query({ query: personalQuery })
+    return client.query({ query: mainQuery })
       .then(({ data }) => {
+        const filteredCoaches = data.coaches.filter(coach => {
+          return coach.personal;
+        });
+        const shuffledCoaches = _.shuffle(filteredCoaches);
+        const shuffledQuestions = _.shuffle(data.questions);
+
         return {
-          background: data.background, 
-          coaches: data.coaches, 
-          questions: data.questions
+          coaches: shuffledCoaches,
+          questions: shuffledQuestions
         }
       });
   },

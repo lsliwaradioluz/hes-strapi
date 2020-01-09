@@ -1,0 +1,76 @@
+.logo {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  z-index: 1000;
+}
+
+.button--primary,
+.button--secondary,
+.button--white {
+  display: inline-block;
+  background-color: color(darkblue);
+  border: none;
+  position: relative;
+  padding: 1rem 4.5rem;
+  margin-top: 0.5rem;
+  border: 2px solid color(darkblue);
+  transition: all 0.15s;
+  border-radius: 0;
+  color: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  outline: none;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 26px;
+    height: 6px;
+    background-color: color(blue);
+    transition: all 0.15s;
+  }
+
+  &:hover, 
+  &:active {
+    background-color: color(lightblue);
+    border-color: color(lightblue);
+  }
+
+  &:hover::after, 
+  &:active::after {
+    background-color: color(darkblue);
+  }
+}
+
+.button--secondary {
+  &:hover, 
+  &:active {
+    background-color: white;
+    color: color(darkblue);
+    border-color: color(darkblue);
+  }
+}
+
+.button--white {
+  background-color: white;
+  color: color(darkblue);
+  border-color: white;
+
+  &:hover {
+    background-color: color(darkblue);
+    border-color: white;
+    color: white;
+    
+    &::after {
+      background-color: white;
+    }
+  }
+}
+

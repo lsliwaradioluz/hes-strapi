@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .loading-page {
     position: fixed;
     z-index: 1000;
@@ -40,11 +40,11 @@ export default {
   }
 
   .loading-circle {
-    border: 16px solid gray;
+    border: 10px solid color(gray);
     border-radius: 50%;
-    border-top: 16px solid #C20114;
-    height: 120px;
-    width: 120px;
+    border-top: 10px solid color(blue);
+    height: 100px;
+    width: 100px;
     animation: spin 0.5s linear infinite;
   }
 </style>

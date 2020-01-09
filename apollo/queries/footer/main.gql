@@ -1,0 +1,10 @@
+query Footers {  
+  footers {
+    id
+    name
+    entries {
+      id
+      entry
+    }
+  }
+}

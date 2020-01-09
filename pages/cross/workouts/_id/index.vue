@@ -1,23 +1,36 @@
 <template>
   <div>
-    <Workout :workout="workout" :days="days" zone="cross" />
+    <Head>Cross</Head>
+    <Workout :workout="workout" :days="days" />
+    <Workouts :workouts="workouts" zone="cross">
+      <template v-slot:subheader>Nie tego szukasz?</template>
+      <template v-slot:header>Sprawdź pozostałe zajęcia</template>
+    </Workouts>
   </div>
 </template>
 
 <script>
-  import Workout from '~/components/fitness/Workout'
-  import crossWorkoutQuery from '~/apollo/queries/cross/workouts/crossWorkout.gql';
+  import Workout from '~/components/shared/Workout'
+  import Workouts from '~/components/shared/Workouts'
+
+  import workoutQuery from '~/apollo/queries/fitness/workout.gql';
 
   export default {
-    layout: 'detailPage',
     components: {
-      Workout
+      Workout,
+      Workouts
     },
     asyncData(context) {
       let client = context.app.apolloProvider.defaultClient;
-      return client.query({ query: crossWorkoutQuery, variables: { id: context.route.params.id } })
+      return client.query({ query: workoutQuery, variables: { id: context.route.params.id } })
         .then(({ data }) => {
+          // Filtrujemy pobrane workouty, aby nie było wśród nich tego, którego szczegóły akurat wyświetlamy
+          const filteredWorkouts = data.workouts.filter(workout => {
+            return workout.id !== context.route.params.id && workout.zone == 'cross';
+          });
+          // Tworzymy nowy obiekt data zawierający pobrane ze Strapi dane 
           return {
+            workouts: filteredWorkouts, 
             workout: data.workout, 
             days: data.days
           }

@@ -1,128 +1,96 @@
 <template>
-	<div class="footer">
-    <div class="footer__tabs main">
-      <div class="footer__tab">
-        <h1 class="footer__tab-header red">
-          Na skróty 
-        </h1>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Zajęcia Fitness</nuxt-link>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Trenerzy Fitness</nuxt-link>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Zajęcia Cross</nuxt-link>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Trenerzy Cross</nuxt-link>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Treningi personalne</nuxt-link>
-        <nuxt-link to="" tag="div" class="footer__tab-link">Kontakt</nuxt-link>
+	<div class="footers">
+    <div class="footers__socials row">
+      <a href="https://www.facebook.com/hesgymfit/" target="_blank" class="footers__social row j-center a-center">
+        <h5 class="mb0">Facebook</h5>
+      </a>
+      <a href="https://www.instagram.com/hesgymfit_hesbox/?hl=pl" target="_blank" class="footers__social row j-center a-center">
+        <h5 class="mb0">Instagram</h5>
+      </a>
+    </div>
+    <div class="footers__action main pt2 pb2">
+      <div>
+        <h5 class="t-left">Pamiętaj o tym, że</h5>
+        <h3 class="mb05">Najtrudniejszy jest pierwszy krok</h3>
       </div>
-      <div class="footer__tab" v-for="footer in footers" :key="footer.id">
-        <h1 class="footer__tab-header red">
-          {{ footer.name }}
-        </h1>
-        <span v-for="entry in footer.entries" class="footer__tab-entry">{{ entry.entry }}</span>
+      <a href="https://wod.guru/guest-registration-form/lesnica" target="_blank"><button class="button--secondary">Zapisz się teraz</button></a>
+    </div>
+    <div class="footers__container column b-black main pt3 pb3">
+      <div class="footer p10" v-for="footer in footers" :key="footer.id">
+        <h4 class="t-blue mb05">{{ footer.name }}</h4>
+        <p class="t-gray m00" v-for="entry in footer.entries" :key="entry.id">{{ entry.entry }}</p>
       </div>
     </div>
-    <div class="footer__signature">
-      Website made with joy by Łukasz Śliwa. Icons made by Freepik from www.flaticon.com
+    <div class="footers__signature main pt1 pb1 t-gray b-black">
+      Designed by FXOFFICE. Coded by Łukasz Śliwa. Icons by Freepik from www.flaticon.com. 
     </div>
-	</div>
+  </div>
 </template>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
 <script>
-  import footerQuery from '~/apollo/queries/footer/footers.gql'
+  import mainQuery from '~/apollo/queries/footer/main.gql'
 
 	export default {
 		apollo: {
       footers: {
         prefetch: true, 
-        query: footerQuery
+        query: mainQuery
       }
     }
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
-  .footer {
-    padding-top: 1rem;
-  }
-
-  .footer__tabs {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .footer__tab {
-    padding: 0.5rem 0;
-  }
-
-  .footer__tab-header {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-  }
-
-  .footer__tab-link {
-    padding: 0.1rem 0;
-  }
-
-  .footer__tab-entry {
-    display: block;
-  }
-
-  .footer__signature {
+  .footers__social {
+    width: 100%;
     padding: 1rem;
-    margin-top: 1rem;
-    text-align: center;
-    border-top: 1px solid rgb(145, 145, 145);
-    color: rgba(255, 255, 255, 0.411);
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      transition: all 0.3s;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('~assets/images/bodypump.png');
+    }
+    &:hover::before {
+      opacity: 1;
+    }
   }
 
-  @media (min-width: 768px) {
-    .footer__media {
-      display: flex;
-      justify-content: space-between;
-    }
+  .footers__action {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                      url('~assets/images/bodypump.png');
+  }
 
-    .footer__tabs {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .footer__media-icons {
-      border: none;
-    }
-
-    .footer__media-icon {
-      padding: 0 1rem;
-    }
-
-    .footer__signature {
-      border: none;
-      padding-top: 2rem;
-    }
+  .footers__signature {
+    border-top: 1px solid color(gray);
   }
 
   @media (min-width: 1024px) {
-    .footer__media {
-      display: flex;
+    .footers__container {
+      flex-direction: row;
       justify-content: space-between;
     }
 
-    .footer__tabs {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .footer__media-icons {
-      border: none;
-    }
-
-    .footer__media-icon {
-      padding: 0 1rem;
-    }
-
-    .footer__signature {
-      border: none;
-      padding-top: 2rem;
+    .footer {
+      flex-basis: 18%;
     }
   }
+  
 </style>
 

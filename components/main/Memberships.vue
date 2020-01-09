@@ -1,11 +1,17 @@
 <template>
-  <div class="memberships main" ref="memberships">
-    <div class="membership" v-for="membership in memberships" :key="membership.id">
-      <p class="membership__title">{{ membership.name }}</p>
-      <ul class="membership__details">
-        <li class="membership__detail" v-for="benefit in membership.entries" :key="benefit.entry">{{ benefit.entry }}</li>
-      </ul>
-      <p class="membership__price">{{ membership.price }}/msc</p>
+  <div class="memberships main">
+    <div>
+      <h5>Członkostwo</h5>
+      <h2>Wybierz swoją strefę</h2>
+    </div>
+    <div class="memberships__container column p11">
+      <div class="membership column a-center mb2 p33 pr2 pl2 b-gray" :class="{ 'membership--blue': membership.name == 'Cross' }" v-for="membership in memberships" :key="membership.id">
+        <h5 class="mb0">{{ membership.name }}</h5>
+        <h5 class="t-black mb0">Cena za miesiąc</h5>
+        <h1 class="t-centered t-black m20">{{ membership.price }}zł</h1>
+        <p class="t-gray t-centered mt0">{{ membership.description }}</p>
+        <nuxt-link to="/contact" tag="button" class="button--secondary mt2" :class="{ 'button--white': membership.name == 'Cross' }">Wybierz</nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -14,118 +20,38 @@
 
   export default {
     props: ['memberships'],
-    mounted() {
-      this.$root.$on('scroll', () => {
-        this.$refs.memberships.scrollIntoView({behavior: "smooth"});
-      });
-    }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
-  .memberships {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .membership--blue {
+    background-color: color(darkblue);
 
-  .membership {
-    text-align: center;
-    color: white;
-    margin: 1.5rem 0;
-    padding: 1rem 1rem 2rem 1rem;
-    border: 1px solid rgba(250, 250, 250, 0.3);
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 300px;
-  }
+    h5, h1 {
+      color: white;
+    }
 
-  .membership::before {
-    content: "";
-    background-color: rgba(250, 250, 250, 0.3);
-    height: 180px;
-    width: 1000px;
-    position: absolute;
-    top: -120px;
-    left: -210px;
-    transform: rotate(-5deg);
-    z-index: 1;
-  }
-
-  .membership::after {
-    content: "";
-    background-color: rgba(250, 250, 250, 0.3);
-    position: absolute;
-    height: 180px;
-    width: 1000px;
-    left: -480px;
-    top: -210px;
-    transform: rotate(106deg);
-  }
-
-  .membership:nth-child(2) {
-    border-color: rgba(167, 0, 254, 0.3);
-  }
-
-  .membership:nth-child(3) {
-    border-color: rgba(214, 167, 38, 0.3);
-  }
-
-  .membership:nth-child(2)::before,
-  .membership:nth-child(2)::after {
-    background-color: rgba(167, 0, 254, 0.3);
-  }
-
-  .membership:nth-child(3)::before,
-  .membership:nth-child(3)::after {
-    background-color: rgba(214, 167, 38, 0.3);
-  }
-
-  .membership__title {
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin: 0;
-    z-index: 2;
-  }
-
-  .membership__details {
-    padding: 2rem 0;
-  }
-
-  .membership__detail {
-    list-style: none;
-    padding-bottom: 0.5rem;
-  }
-
-  .membership__detail::first-letter {
-    text-transform: uppercase;
-  }
-
-  .membership__price {
-    font-size: 3rem;
-    margin: 0;
+    p {
+      color: color(blue);
+    }
   }
 
   @media (min-width: 1024px) {
-
-    .memberships {
+    .memberships__container {
       flex-direction: row;
       justify-content: space-between;
+      align-items: flex-start;
     }
 
     .membership {
-      width: 33%;
+      flex-basis: 30%;
+
+      button {
+        padding-right: 3rem;
+        padding-left: 3rem;
+      }
     }
   }
+
 </style>

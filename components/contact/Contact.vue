@@ -1,122 +1,85 @@
 <template>
-  <div class="contact" ref="contact">
-    <div class="contact__form main">
-      <div class="contact__form-header header">
-        Napisz do nas
-      </div>
-      <div class="contact__form-subheader">
-        Chciałbyś o coś zapytać, zwrócić na coś uwagę lub zaproponować współpracę? Poniższy formularz jest właśnie dla Ciebie! Wyślij nam wiadomość, a my odpiszemy tak szybko, jak tylko możliwe. Nie zapomnij podać swojego adresu e-mail.
-      </div>
-      <form class="contact__form-fields">
-        <input class="contact__form-field" placeholder="Twój adres email" v-model="form.from" type="email" required ref="email">
-        <input class="contact__form-field" placeholder="Temat" v-model="form.subject" type="text" required>
-        <textarea class="contact__form-field" placeholder="Treść" rows="6" v-model="form.text" required></textarea>
-        <button ref="formbutton" :disabled="form.loading" type="submit" class="button" @click.prevent="sendForm">Wyślij</button>
-      </form>
+  <div class="contact main">
+    <div class="contact__header">
+      <h5>Masz sprawę?</h5>
+      <h2>Daj nam znać!</h2>
+      <p class="t-lightblack t-centered p11 pt0">Zadzwoń już dziś i zapytaj o atrakcyjne rabaty! Nasz zespół odpowie na wszystkie Twoje pytania i dopasuje ofertę do Twoich potrzeb. Jesteś u nas po raz pierwszy? Nasi konsultanci opowiedzą o zajęciach i zapoznają Cię z naszymi trenerami.</p>
     </div>
-      <div class="contact__map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2503.112577060113!2d16.87465851572352!3d51.14327507957689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f955069f92b9f%3A0xc386a12c02ebbc71!2sWielkopolska%2072%2C%2054-027%20Wroc%C5%82aw!5e0!3m2!1spl!2spl!4v1574528914938!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    <div class="contact__container p11 column">
+      <div class="contact__details b-black p22 t-centered">
+        <h3>Napisz lub zadzwoń</h3>
+        <div class="pb1" v-for="footer in footers" :key="footer.id">
+          <h5>{{ footer.name }}</h5>
+          <p class="m00" v-for="entry in footer.entries" :key="entry.id">{{ entry.entry }}</p>
+        </div>
+      </div>   
+      <div class="contact__map m20">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.439006352793!2d16.878863876282146!3d51.14364724563507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f955069fee439%3A0xce59025c1425f3db!2sHes%20Gym%26Fitness!5e0!3m2!1spl!2spl!4v1578494069146!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
       </div>
+      <div class="contact__form b-gray p22">
+        <h3 class="t-centered t-black">Skorzystaj z formularza</h3>
+        <form>
+          <input placeholder="Twój adres email" v-model="form.from" type="email" required ref="email" :disabled="loading" spellcheck="false">
+          <input placeholder="Temat" v-model="form.subject" type="text" required :disabled="loading" spellcheck="false">
+          <textarea placeholder="Treść" rows="6" v-model="form.text" required :disabled="loading" spellcheck="false"></textarea>
+          <button :disabled="loading" type="submit" class="button--secondary pl0 pr0" @click.prevent="sendForm">{{ buttonText }}</button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>	
-	import Strapi from 'strapi-sdk-javascript';
-	const strapi = new Strapi('https://hes-backend.herokuapp.com');
-
-	export default {
-		data() {
-			return {
+  export default {
+    props: ['footers'],
+    data() {
+      return {
         form: {
+          to: 'recepcja@hesgym.pl',
           from: '',
           subject: '',
-          text: '', 
-          loading: false
-        }
-			}
-    },
-    computed: {
-      currentYear() {
-				return new Date().getFullYear();
+          text: ''
+        },
+        loading: false, 
+        buttonText: 'Wyślij'
       }
     },
-		methods: {
-			sendForm() {
-        this.form.loading = true;
-				strapi.request("POST", "/email", {
-          data: {
-            to: 'lukasz.mateusz.sliwa@gmail.com',
-            from: this.form.from,
-            subject: this.form.subject,
-            text: this.form.text,
-          }
-        })
-        .then(res => {
-          this.form.loading = false;
-          this.$refs.formbutton.innerText = 'Wysłano!';
-          setTimeout(() => {
-            this.$refs.formbutton.innerText = 'Wyślij';
-            this.form.from = '';
-            this.form.subject = '';
-            this.form.text = '';
-          }, 3000);
-        })
-        .catch(err => console.log(err));
-			}
-    }, 
-    mounted() {
-      if (this.$route.params.focusForm == true) {
-        this.$refs.email.focus();
-        setTimeout(() => {
-          this.$refs.contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        },);
+    methods: {
+      sendForm() {
+        this.loading = true;
+        const endpoint = process.env.NODE_ENV == 'development' ? 'http://localhost:1337/email' : 'https://hes-backend.herokuapp.com/email';
+        this.$axios.$post(endpoint, this.form)
+          .then(res => {
+            this.buttonText = 'Wysłano!';
+            setTimeout(() => {
+              this.loading = false;
+              this.buttonText = 'Wyślij';
+              this.form.from = '';
+              this.form.subject = '';
+              this.form.text = '';
+            }, 2000);
+          })
+          .catch(err => {
+            this.buttonText = 'Błąd!';
+            setTimeout(() => {
+              this.loading = false;
+              this.buttonText = 'Wyślij';
+              this.form.from = '';
+              this.form.subject = '';
+              this.form.text = '';
+            }, 2000);
+          });
       }
-    }
-	};
+    },
+  }
 </script>
 
-<style scoped>
-
-  .contact__form-fields {
-    width: 100%;
-    padding-top: 0.5rem;
-  }
-
-  .contact__form-field {
-    display: block;
-    width: 100%;
-    background-color: rgba(250,250,250,0.3);
-    border: none;
-    border-radius: 5px;
-    padding: 1rem;
-    margin: 1rem 0;
-    color: white;
-    font-family: inherit;
-    transition: all 0.3s;
-    resize: none; 
-  }
-
-  .contact__form-field:focus {
-    outline: 1px solid white;
-  }
-
-  .contact__form-signature {
-	  text-align: center;
-	  width: 100%;
-    font-weight: 400;
-	}
-
-	.contact__form-signature span {
-		display: block;
-  }
-
-  .contact__map {
-    padding: 2rem;
-  }
+<style lang="scss" scoped>
 
   .contact__map {
     overflow: hidden;
-    padding-bottom: 60%;
+    padding: 2rem;
+    padding-bottom: 100%;
     position:relative;
     width: 100%;
   }
@@ -129,23 +92,50 @@
     position: absolute;
   }
 
-  @media (min-width: 1024px) {
+  .contact__form {
 
-    .contact {
+    input, 
+    textarea {
+      background-color: transparent;
+      width: 100%;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid color(blue);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+      resize: none;
+      font-family: inherit;
+    }
+    button {
+      width: 100%;
+    }
+  }
+
+@media (min-width: 1024px) {
+  .contact__header {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .contact__container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+    div {
+      flex-basis: 30%;
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .contact__form {
-      width: 40%;
-      padding-left: 0;
-      padding-right: 0;
+      justify-content: center;
     }
 
     .contact__map {
       padding-bottom: 30%;
+      margin: 0;
     }
+
   }
+}
 </style>
 
