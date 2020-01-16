@@ -27,9 +27,9 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/styles/fonts.css',
     '~/assets/styles/layout.scss',
     '~/assets/styles/elements.scss',
-    '~/assets/styles/fonts.css',
     '~/assets/styles/animations.css',
     '~/assets/styles/general.scss',
     '~/assets/styles/colors.scss',
