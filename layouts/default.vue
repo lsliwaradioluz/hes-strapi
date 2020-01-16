@@ -17,3 +17,14 @@ export default {
   }
 };
 </script>  
+
+<style>
+  html, body {
+    margin: 0;
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+    color: #FDFFFC;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+</style>
