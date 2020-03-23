@@ -86,5 +86,27 @@ export default {
     background-size: cover;
     background-position: center;
   }
+
+  @media (min-width: 1024px) {
+
+    .workout__image  {
+      padding: 0;
+      margin: 0;
+    }
+
+    .workout__container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+
+      div {
+        flex-basis: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
   
 </style>
