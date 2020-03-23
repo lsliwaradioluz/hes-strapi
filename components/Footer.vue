@@ -13,7 +13,8 @@
         <h5 class="t-left">Pamiętaj o tym, że</h5>
         <h3 class="mb05">Najtrudniejszy jest pierwszy krok</h3>
       </div>
-      <a href="https://wod.guru/guest-registration-form/lesnica" target="_blank"><button class="button--secondary">Zapisz się teraz</button></a>
+      <a><button class="button--secondary">Zapisz się teraz</button></a>
+      <!-- <a href="https://wod.guru/guest-registration-form/lesnica" target="_blank"><button class="button--secondary">Zapisz się teraz</button></a> -->
     </div>
     <div class="footers__container column b-black main pt3 pb3">
       <div class="footer p10" v-for="footer in footers" :key="footer.id">
