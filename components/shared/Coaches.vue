@@ -12,7 +12,7 @@
       <Carousel :pagination="false" :columns="[[768, 2], [1024, 3]]">
         <div class="coach p11" v-for="coach in coaches" :key="coach.id">
           <div class="coach__content">
-            <div class="coach__image" :style="{ backgroundImage: `url('${coach.image.url}')`}"></div>
+            <div class="coach__image" :style="{ backgroundImage: `url('${coach.image && coach.image.url}')`}"></div>
             <div class="coach__description pt1">
               <h5 class="coach__name">{{ coach.name }}</h5>
               <p>{{ coach.description | cutText }}</p>

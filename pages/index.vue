@@ -15,13 +15,13 @@
   import Facilities from '~/components/main/Facilities.vue'
 
   import mainQuery from '~/apollo/queries/main/main.gql'
-  
+
   export default {
     components: {
       Landing,
       About,
-      Memberships, 
-      Zones, 
+      Memberships,
+      Zones,
       Facilities,
     },
     asyncData(context) {
@@ -30,8 +30,8 @@
         .then(({ data }) => {
           return {
             memberships: data.memberships,
-            zones: data.zones, 
-            facilities: data.facilities, 
+            zones: data.zones,
+            facilities: data.facilities,
             infos: data.infos
           }
         });

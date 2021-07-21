@@ -12,14 +12,14 @@
 
 <script>
   import mainQuery from '~/apollo/queries/fitness/main.gql'
-  
+
   import Workouts from '~/components/shared/Workouts'
   import Schedule from '~/components/shared/Schedule'
   import Coaches from '~/components/shared/Coaches'
 
   export default {
     components: {
-      Workouts, 
+      Workouts,
       Schedule,
       Coaches
     },
@@ -31,11 +31,11 @@
             return workout.zone == context.route.name;
           });
           const filteredCoaches = data.coaches.filter(coach => {
-            return coach.fitness == true;  
+            return coach.fitness == true;
           });
 
           return {
-            workouts: filteredWorkouts, 
+            workouts: filteredWorkouts,
             days: data.days,
             coaches: filteredCoaches
           }
