@@ -29,7 +29,10 @@ export default {
     async routes () {
       // Generate static routes for workouts
       const workouts = await axios.get('https://hes-backend.herokuapp.com/workouts');
-      const workoutsRoutes = workouts.data.map(workout => ({ route: `/${workout.zone}/workouts/${workout.id}` }));
+      const workoutsRoutes = workouts.data.map(workout => {
+        const zone = workout.zone === 'fitness' ? 'fitness' : workout.type === 'kids' ? 'kids' : 'cross'
+        return { route: `/${zone}/workouts/${workout.id}` }
+      });
 
       // Generate static routes for coaches
       const coaches = await axios.get('https://hes-backend.herokuapp.com/coaches');
