@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import axios from 'axios'
 
 export default {
   mode: 'universal',
@@ -24,6 +25,22 @@ export default {
   /*
   ** Global CSS
   */
+  generate: {
+    async routes () {
+      // Generate static routes for workouts
+      const workouts = await axios.get('https://hes-backend.herokuapp.com/workouts');
+      const workoutsRoutes = workouts.data.map(workout => ({ route: `/${workout.zone}/workouts/${workout.id}` }));
+
+      // Generate static routes for coaches
+      const coaches = await axios.get('https://hes-backend.herokuapp.com/coaches');
+      const coachesRoutes = coaches.data.map(coach => ({ route: `/${coach.fitness ? 'fitness' : 'cross'}/coaches/${coach.id}` }))
+
+      return [
+        ...workoutsRoutes,
+        ...coachesRoutes
+      ]
+    }
+  },
   css: [
     '~/assets/styles/fonts.css',
     '~/assets/styles/layout.scss',
@@ -55,7 +72,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.NODE_ENV == 'development' ? 'http://localhost:1337/graphql' : 'https://hes-backend.herokuapp.com/graphql'
+        httpEndpoint: 'https://hes-backend.herokuapp.com/graphql'
       }
     }
   },
