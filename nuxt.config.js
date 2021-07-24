@@ -3,7 +3,7 @@ import webpack from 'webpack'
 export default {
   mode: 'universal',
   /*
-  ** Headers of the page 
+  ** Headers of the page
   */
   head: {
     title: 'Hesgym',
@@ -14,10 +14,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    ], 
-    script: [
-      { src: 'https://js.stripe.com/v3' }
-    ]
+    ],
   },
   /*
   ** Customize the progress-bar color
@@ -54,7 +51,7 @@ export default {
     '@nuxtjs/axios',
     ['@nuxtjs/style-resources']
   ],
-  apollo: {  
+  apollo: {
     clientConfigs: {
       default: {
         httpEndpoint: process.env.NODE_ENV == 'development' ? 'http://localhost:1337/graphql' : 'https://hes-backend.herokuapp.com/graphql'
