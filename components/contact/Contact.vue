@@ -36,18 +36,22 @@
       return {
         form: {
           to: 'hesgym@gmail.com',
-          from: 'lsliwaradioluz@gmail.com',
-          subject: 'Subject',
-          text: 'Text'
+          from: '',
+          subject: '',
+          text: ''
         },
         loading: false,
-        buttonText: 'Wyślij'
+        buttonText: 'Wyślij',
+        endpoint: process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : 'https://hes-backend.herokuapp.com'
       }
+    },
+    mounted () {
+      this.$axios.get(`${this.endpoint}/coaches`)
     },
     methods: {
       sendForm() {
         this.loading = true;
-        const endpoint = process.env.NODE_ENV == 'development' ? 'http://localhost:1337/email' : 'https://hes-backend.herokuapp.com/email';
+        const endpoint = `${this.endpoint}/email`
         this.$axios.$post(endpoint, {
           to: 'hesgym@gmail.com',
           from: 'hesgym@gmail.com',
