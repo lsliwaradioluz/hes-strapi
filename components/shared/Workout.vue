@@ -15,9 +15,9 @@
           </p>
         </div>
         <h5>Trenerzy</h5>
-        <p v-for="coach in workout.coaches" :key="coach.id">{{ coach.name }}</p> 
-      </div> 
-      <div class="workout__image m20" :style="{ 'background-image': `url('${workout.image.url}')`}"></div>    
+        <p v-for="coach in workout.coaches" :key="coach.id">{{ coach.name }}</p>
+      </div>
+      <div class="workout__image m20" :style="{ 'background-image': `url('${workout.image && workout.image.url}')`}"></div>
       <div class="workout__description b-gray p22 ">
         <h5>Co to takiego?</h5>
         <p>{{ workout.description }}</p>
@@ -42,7 +42,7 @@ export default {
       } else if (this.workout.time == 'min45') {
         return '45 minut'
       }
-    }, 
+    },
     workoutTimes() {
       const workoutDays = [];
       this.days.forEach(cur => {
@@ -50,12 +50,12 @@ export default {
         cur[this.zone].forEach(cur => {
           if (cur.class.name == this.workout.name) {
             let minutes;
-            cur.minutes == 0 ? minutes = '00' : minutes = cur.minutes; 
+            cur.minutes == 0 ? minutes = '00' : minutes = cur.minutes;
             workoutHours.push(`${cur.hours}:${minutes}`);
-          } 
+          }
         });
         if (workoutHours.length > 0) workoutDays.push({ name: cur.name, time: workoutHours })
-      }); 
+      });
       return workoutDays;
     },
   }
@@ -108,5 +108,5 @@ export default {
       }
     }
   }
-  
+
 </style>
