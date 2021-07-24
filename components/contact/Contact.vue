@@ -45,9 +45,6 @@
         endpoint: process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : 'https://hes-backend.herokuapp.com'
       }
     },
-    mounted () {
-      this.$axios.get(`${this.endpoint}/coaches`)
-    },
     methods: {
       sendForm() {
         this.loading = true;

@@ -14,6 +14,15 @@ export default {
   components: {
     Navigation,
     Footer
+  },
+  mounted () {
+    this.wakeDynoUp()
+  },
+  methods: {
+    wakeDynoUp () {
+      const endpoint = 'https://hes-backend.herokuapp.com/coaches';
+      this.$axios.get(endpoint);
+    }
   }
 };
-</script>  
+</script>
