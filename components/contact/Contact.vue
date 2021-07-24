@@ -12,7 +12,7 @@
           <h5>{{ footer.name }}</h5>
           <p class="m00" v-for="entry in footer.entries" :key="entry.id">{{ entry.entry }}</p>
         </div>
-      </div>   
+      </div>
       <div class="contact__map m20">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.439006352793!2d16.878863876282146!3d51.14364724563507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470f955069fee439%3A0xce59025c1425f3db!2sHes%20Gym%26Fitness!5e0!3m2!1spl!2spl!4v1578494069146!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
       </div>
@@ -29,18 +29,18 @@
   </div>
 </template>
 
-<script>	
+<script>
   export default {
     props: ['footers'],
     data() {
       return {
         form: {
-          to: 'recepcja@hesgym.pl',
-          from: '',
-          subject: '',
-          text: ''
+          to: 'hesgym@gmail.com',
+          from: 'lsliwaradioluz@gmail.com',
+          subject: 'Subject',
+          text: 'Text'
         },
-        loading: false, 
+        loading: false,
         buttonText: 'Wyślij'
       }
     },
@@ -48,7 +48,19 @@
       sendForm() {
         this.loading = true;
         const endpoint = process.env.NODE_ENV == 'development' ? 'http://localhost:1337/email' : 'https://hes-backend.herokuapp.com/email';
-        this.$axios.$post(endpoint, this.form)
+        this.$axios.$post(endpoint, {
+          to: 'hesgym@gmail.com',
+          from: 'hesgym@gmail.com',
+          subject: `Nowa wiadomość z formularza kontaktowego hesgym-fit: ${this.form.subject}`,
+          html: `
+            <h4>Wysłano z adresu:</h4>
+            <p>${this.form.from}</p>
+            <h4>Temat:</h4>
+            <p>${this.form.subject}</p>
+            <h4>Treść:</h4>
+            <p>${this.form.text}</p>
+          `
+        })
           .then(res => {
             this.buttonText = 'Wysłano!';
             setTimeout(() => {
@@ -83,7 +95,7 @@
     position:relative;
     width: 100%;
   }
-  
+
   .contact__map iframe {
     left: 0;
     top: 0;
@@ -94,7 +106,7 @@
 
   .contact__form {
 
-    input, 
+    input,
     textarea {
       background-color: transparent;
       width: 100%;
