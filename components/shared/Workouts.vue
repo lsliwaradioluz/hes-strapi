@@ -1,5 +1,5 @@
 <template>
-  <div class="workouts main pb0 t-black">
+  <div class="workouts main t-black">
     <div>
       <h5 v-if="$slots.subheader">
         <slot name="subheader"></slot>
