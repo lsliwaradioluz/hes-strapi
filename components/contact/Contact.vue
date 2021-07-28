@@ -51,6 +51,8 @@
     methods: {
       wakeDynoUp () {
         this.$axios.get(`${this.endpoint}/coaches`);
+        const response = this.$axios.get(`https://hesgym-fit.pl/.netlify/functions/email`);
+        console.log(response)
       },
       sendForm() {
         this.loading = true;
