@@ -34,9 +34,13 @@ export default {
         return { route: `/${zone}/workouts/${workout.id}` }
       });
 
-      // Generate static routes for coaches
+      // Generate static routes for fitness, cross and personal coaches
       const coaches = await axios.get('https://hes-backend.herokuapp.com/coaches');
-      const coachesRoutes = coaches.data.map(coach => ({ route: `/${coach.fitness ? 'fitness' : 'cross'}/coaches/${coach.id}` }))
+      const coachesRoutes = coaches.data.reduce((routes, coach) => {
+        routes.push({ route: `/${coach.fitness ? 'fitness' : 'cross'}/coaches/${coach.id}` })
+        if (coach.personal) routes.push({ route: `/personal/coaches/${coach.id}` })
+        return routes
+      }, [])
 
       return [
         ...workoutsRoutes,
