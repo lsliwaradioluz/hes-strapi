@@ -86,3 +86,9 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Local Netlify folder
+.netlify
+
+# Environment variables
+.env
