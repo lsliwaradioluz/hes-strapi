@@ -42,32 +42,40 @@
         },
         loading: false,
         buttonText: 'Wyślij',
-        endpoint: process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : 'https://hes-backend.herokuapp.com'
+        domain: process.env.NODE_ENV === 'development' ? 'http://localhost:8888' : 'https://hesgym-fit.pl',
+        path: '.netlify/functions/email'
       }
     },
-    mounted () {
-      this.wakeDynoUp()
-    },
     methods: {
-      wakeDynoUp () {
-        this.$axios.get(`${this.endpoint}/coaches`);
-        const response = this.$axios.get(`https://hesgym-fit.pl/.netlify/functions/email`);
-        console.log(response)
+      notifyError () {
+        this.buttonText = 'Błąd!';
+        setTimeout(() => {
+          this.loading = false;
+          this.buttonText = 'Wyślij';
+          this.form.from = '';
+          this.form.subject = '';
+          this.form.text = '';
+        }, 2000);
       },
-      sendForm() {
+      sendForm () {
+        const { from, subject, text } = this.form
+        if (!from || !subject || !text) {
+          this.notifyError()
+          return
+        }
         this.loading = true;
-        const endpoint = `${this.endpoint}/email`
+        const endpoint = `${this.domain}/${this.path}`
         this.$axios.$post(endpoint, {
           to: 'hesgym@gmail.com',
           from: 'hesgym@gmail.com',
-          subject: `Nowa wiadomość z formularza kontaktowego hesgym-fit: ${this.form.subject}`,
+          subject: `Nowa wiadomość z formularza kontaktowego hesgym-fit: ${subject}`,
           html: `
             <h4>Wysłano z adresu:</h4>
-            <p>${this.form.from}</p>
+            <p>${from}</p>
             <h4>Temat:</h4>
-            <p>${this.form.subject}</p>
+            <p>${subject}</p>
             <h4>Treść:</h4>
-            <p>${this.form.text}</p>
+            <p>${text}</p>
           `
         })
           .then(res => {
@@ -81,14 +89,7 @@
             }, 2000);
           })
           .catch(err => {
-            this.buttonText = 'Błąd!';
-            setTimeout(() => {
-              this.loading = false;
-              this.buttonText = 'Wyślij';
-              this.form.from = '';
-              this.form.subject = '';
-              this.form.text = '';
-            }, 2000);
+            this.notifyError()
           });
       }
     },
