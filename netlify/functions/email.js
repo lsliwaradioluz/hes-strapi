@@ -8,7 +8,6 @@ const headers = {
 };
 
 exports.handler = async function(event, context) {
-  console.log(event.httpMethod)
   if (event.httpMethod === 'POST') {
     const { from, to, subject, html } = JSON.parse(event.body)
     const transporter = nodemailer.createTransport({
