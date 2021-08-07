@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.0-rc18",
-    "@nuxtjs/axios": "^5.9.2",
     "core-js": "^2.6.10",
     "graphql": "^14.5.8",
     "lodash.shuffle": "^4.2.0",

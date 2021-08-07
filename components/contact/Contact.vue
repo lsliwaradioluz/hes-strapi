@@ -65,7 +65,7 @@
         }
         this.loading = true;
         const endpoint = `${this.domain}/${this.path}`
-        this.$axios.$post(endpoint, {
+        const body = {
           to: 'hesgym@gmail.com',
           from: 'hesgym@gmail.com',
           subject: `Nowa wiadomość z formularza kontaktowego hesgym-fit: ${subject}`,
@@ -77,8 +77,13 @@
             <h4>Treść:</h4>
             <p>${text}</p>
           `
+        }
+        fetch(endpoint, {
+          method: 'POST',
+          body: JSON.stringify(body)
         })
-          .then(res => {
+          .then(res => res.json())
+          .then(_ => {
             this.buttonText = 'Wysłano!';
             setTimeout(() => {
               this.loading = false;
@@ -88,7 +93,7 @@
               this.form.text = '';
             }, 2000);
           })
-          .catch(err => {
+          .catch(_ => {
             this.notifyError()
           });
       }

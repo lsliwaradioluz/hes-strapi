@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import axios from 'axios'
+import fetch from 'node-fetch'
 
 export default {
   mode: 'universal',
@@ -28,15 +28,15 @@ export default {
   generate: {
     async routes () {
       // Generate static routes for workouts
-      const workouts = await axios.get('https://hes-backend.herokuapp.com/workouts');
-      const workoutsRoutes = workouts.data.map(workout => {
+      const workouts = await fetch('https://hes-backend.herokuapp.com/workouts');
+      const workoutsRoutes = (await workouts.json()).map(workout => {
         const zone = workout.zone === 'fitness' ? 'fitness' : workout.type === 'kids' ? 'kids' : 'cross'
         return { route: `/${zone}/workouts/${workout.id}` }
       });
 
       // Generate static routes for fitness, cross and personal coaches
-      const coaches = await axios.get('https://hes-backend.herokuapp.com/coaches');
-      const coachesRoutes = coaches.data.reduce((routes, coach) => {
+      const coaches = await fetch('https://hes-backend.herokuapp.com/coaches');
+      const coachesRoutes = (await coaches.json()).reduce((routes, coach) => {
         routes.push({ route: `/${coach.fitness ? 'fitness' : 'cross'}/coaches/${coach.id}` })
         if (coach.personal) routes.push({ route: `/personal/coaches/${coach.id}` })
         return routes
@@ -73,7 +73,6 @@ export default {
   */
   modules: [
     '@nuxtjs/apollo',
-    '@nuxtjs/axios',
     ['@nuxtjs/style-resources']
   ],
   apollo: {
