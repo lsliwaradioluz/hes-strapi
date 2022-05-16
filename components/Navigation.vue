@@ -16,6 +16,8 @@
         <nuxt-link to="/personal" tag="li">Treningi personalne</nuxt-link>
         <a href="https://akvit-aneta-komendera.business.site/" target="_blank">Dietetyk</a>
         <a href="https://wod.guru/athlete-registration-form/lesnica" target="_blank">Kup karnet</a>
+        <a href="https://lesnica.wod.guru/user/login" target="_blank">Zaloguj się</a>
+        <a href="https://wod.guru/guest-registration-form/lesnica" target="_blank">Dołącz do nas</a>
         <nuxt-link to="/contact" tag="li">Kontakt</nuxt-link>
       </ul>
     </div>
