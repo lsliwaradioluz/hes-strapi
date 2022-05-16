@@ -15,6 +15,7 @@
         <nuxt-link to="/kids" tag="li">Kids</nuxt-link>
         <nuxt-link to="/personal" tag="li">Treningi personalne</nuxt-link>
         <a href="https://akvit-aneta-komendera.business.site/" target="_blank">Dietetyk</a>
+        <a href="https://wod.guru/athlete-registration-form/lesnica" target="_blank">Kup karnet</a>
         <nuxt-link to="/contact" tag="li">Kontakt</nuxt-link>
       </ul>
     </div>
