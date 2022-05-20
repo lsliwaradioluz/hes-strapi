@@ -1,8 +1,8 @@
 <template>
-  <nav class="navigation main pt1 pb1" :class="{ 'navigation--triggered': scroll }">
+  <nav class="navigation main pt0 pb0" :class="{ 'navigation--triggered': scroll }">
     <div class="navigation__icons row j-between a-center">
       <div class="navigation__logo logo">
-        <nuxt-link to="/" tag="li" @click.native="toggleNav" class="logo">HES<span class="t-blue logo">Gym</span></nuxt-link>
+        <Logo @clicked="toggleNav" />
       </div>
       <div class="navigation__bars column j-between a-end" @click="toggleNav" ref="bars">
         <span class="navigation__bar"></span>
@@ -25,7 +25,9 @@
 </template>
 
 <script>
+  import Logo from '~/components/global/Logo.vue';
   export default {
+    components: { Logo },
     data() {
       return {
         scroll: 0
@@ -68,10 +70,6 @@
     z-index: 1000;
     width: 100%;
     transition: all 0.3s;
-
-    .logo {
-      cursor: pointer;
-    }
   }
 
   .navigation__bars {
@@ -133,12 +131,6 @@
   }
 
   @media (min-width: 1024px) {
-
-    .navigation {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-
     .navigation__bars {
       display: none;
     }
@@ -183,8 +175,6 @@
 
   .navigation--triggered {
     background-color: color(black);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
   }
   
 </style>
