@@ -46,7 +46,6 @@
       }
     },
     mounted() {
-      console.log(window.innerWidth);
       this.interval = setInterval(() => {
         this.current++
         if (this.current == this.infos.length) this.current = 0;
