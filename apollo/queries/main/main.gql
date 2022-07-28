@@ -27,5 +27,11 @@ query mainQuery {
     header
     subheader
     link
+    image_desktop {
+      url
+    }
+    image_mobile {
+      url
+    }
   }
 }

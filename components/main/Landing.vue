@@ -1,5 +1,9 @@
 <template>
   <div class="landing main row a-center j-start">
+    <picture class="landing__image">
+      <source media="(max-width:500px)" :srcset="image_mobile">
+      <img :src="image_desktop">
+    </picture>
     <transition name="fade" mode="out-in">
       <div class="landing__content column a-start j-center" :key="current">
         <h1>{{ currentInfo.header }}</h1>
@@ -30,7 +34,13 @@
     computed: {
       currentInfo() {
         return this.infos[this.current];
-      }
+      },
+      image_mobile() {
+        return this.currentInfo.image_mobile?.url
+      },
+      image_desktop() {
+        return this.currentInfo.image_desktop?.url
+      },
     },
     methods: {
       switchInfo(index) {
@@ -56,10 +66,18 @@
 
   .landing {
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('~assets/images/gym.jpg');
-    background-size: cover;
-    background-position: center;
     position: relative;
+
+    &__image img {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
   }
 
   .landing__content p {
