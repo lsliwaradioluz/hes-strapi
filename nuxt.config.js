@@ -78,7 +78,9 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://hes-backend.herokuapp.com/graphql'
+        httpEndpoint: process.env.NODE_ENV === 'development'
+          ? 'http://localhost:1337/graphql'
+          : 'https://hes-backend.herokuapp.com/graphql'
       }
     }
   },
