@@ -19,7 +19,15 @@
     <div class="footers__container column b-black main pt3 pb3">
       <div class="footer p10" v-for="footer in footers" :key="footer.id">
         <h4 class="t-blue mb05">{{ footer.name }}</h4>
-        <p class="t-gray m00" v-for="entry in footer.entries" :key="entry.id">{{ entry.entry }}</p>
+        <component
+          v-for="entry in footer.entries"
+          :key="entry.id"
+          :is="entry.file ? 'a' : 'p'"
+          :href="entry.file && entry.file.url"
+          class="footer__entry t-gray m00"
+        >
+          {{ entry.text }}
+        </component>
       </div>
     </div>
     <div class="footers__signature main pt1 pb1 t-gray b-black">
@@ -42,6 +50,12 @@
 </script>
 
 <style lang="scss" scoped>
+  .footer {
+    &__entry {
+      display: block;
+      font-size: 14.4px;
+    }
+  }
 
   .footers__social {
     width: 100%;

@@ -4,7 +4,10 @@ query Footers {
     name
     entries {
       id
-      entry
+      text
+      file {
+        url
+      }
     }
   }
 }
