@@ -17,7 +17,7 @@
     "lodash.shuffle": "^4.2.0",
     "lodash.union": "^4.6.0",
     "nodemailer": "^6.6.3",
-    "nuxt": "^2.0.0",
+    "nuxt": "^3.0.0",
     "strapi-sdk-javascript": "^0.3.3"
   },
   "devDependencies": {
